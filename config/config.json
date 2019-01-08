@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "berkeley",
-    "database": "exampledb",
+    "password": "",
+    "database": "democratreatsdb",
     "host": "localhost",
     "dialect": "mysql"
   },
