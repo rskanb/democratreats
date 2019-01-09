@@ -37,5 +37,5 @@ Contributors
 
 Wiley Buchanan
 Jordan Larios
-Ritesh Patel
 Andrew Smyth
+Ritesh 
