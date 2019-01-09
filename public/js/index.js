@@ -1,23 +1,35 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
-var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
 
 var signUpForm = $("form.signup");
 //$("#add-dreamcity").addClass('hidden');
 //$("#add-dreamcity").removeClass('hidden');
-$("#signup-form").on("click", function(){
+$("#signup-form").on("click", function(event){
   event.preventDefault();
   $(".login-container").addClass("hidden");
   $(".signup-container").removeClass("hidden");
-})
+});
 
 signUpForm.on("submit", function(event) {
   event.preventDefault();
   $(".login-container").removeClass("hidden");
   $(".signup-container").addClass("hidden");
-})
+  // var uname = $("#name-input").val().trim();
+  // var uemail = $("#signupemail-input").val().trim();
+  // var upassword = $("#signuppassword-input").val().trim();
+  //var uadmin = $("#admin-input").val().trim();
+//   var uadmin = $("#admin-input").is(':checked', function(){
+//     var uadmin = true;
+});
+// var uadmin = $(".inline-checkbox").is(":checked");
+
+//   var user = {
+//     name: uname,
+//     email: uemail,
+//     password: upassword,
+//     admin: uadmin
+//   }
+//   console.log(user);
+// })
 
 // The API object contains methods for each kind of request we'll make
 // var API = {
