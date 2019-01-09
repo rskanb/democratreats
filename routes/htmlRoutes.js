@@ -1,8 +1,13 @@
 var db = require("../models");
+var path = require("path");
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function (app) {
   // Load index page
   app.get("/", function (req, res) {
+    if (req.user) {
+      res.redirect("/home");
+    }
     res.render("index", {
       msg: "Welcome!",
     });
@@ -49,4 +54,9 @@ module.exports = function (app) {
   app.get("*", function (req, res) {
     res.render("404");
   });
+
+  app.get("/home", isAuthenticated, function(req, res) {
+    res.render("home");
+  });
+
 };

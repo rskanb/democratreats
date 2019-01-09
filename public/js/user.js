@@ -41,7 +41,7 @@ $(document).ready(function() {
         nameInput.val("");
         emailInput.val(""),
         passwordInput.val(""),
-        adminStatus.$(".inline-checkbox").is(":unchecked")
+        $(".inline-checkbox").prop('checked', false)
         $("#email-input").val("");
         $("#password-input").val("");
       });
