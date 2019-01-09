@@ -1,6 +1,7 @@
 {
   "development": {
     "username": "root",
+
     "password": "",
     "database": "democratreatsdb",
     "host": "localhost",
