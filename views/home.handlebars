@@ -19,34 +19,33 @@
   </div>
 </nav>
 
-<div class="wrapper">
-  {{!-- Header --}}
-  <div class="jumbotron pt-5 pb-4">
-    <div class="wrapper text-center">
-      <h2>
-        Welcome Admin/User!
-        {{!-- check and say hi to admin or user here --}}
-        <br>
-        <br>
-        Currently Viewing Group X
-      </h2>
-      {{!-- Change to dynamically get Group --}}
+<div class="jumbotron pt-5 pb-4">
+  <div class="wrapper text-center">
+    <h2>
+      Welcome Admin/User!
+      {{!-- check and say hi to admin or user here --}}
       <br>
+      <br>
+      Currently Viewing Group X
+    </h2>
+    {{!-- Change to dynamically get Group --}}
+    <br>
 
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Click here to change Group
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Click here to change Group
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
       </div>
     </div>
   </div>
+</div>
 
+<div class="wrapper w-75 mx-auto">
   {{!-- Button Group Nav --}}
   <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
     <button class="btn btn-primary w-100" id="option1">
@@ -69,17 +68,20 @@
 
   {{!-- Generated Content Here --}}
   <div class="resource-container hidden">
-    <h1>resources</h1>
-    {{something}}
+    <div class="wrapper mx-5 mt-4">
+      <h1>Resources</h1>
+      {{something}}
+    </div>
   </div>
 
   <div class="member-container hidden">
     <div class="wrapper mx-5 mt-4">
-      <div class="card">
-        <div class="card-body">
+      {{!-- <div class="card">
+        <div class="card-body p-2">
           <button class="btn btn-primary">Add Member</button>
+          <button class="btn btn-danger float-right">Delete Selected</button>
         </div>
-      </div>
+      </div> --}}
 
       {{something}}
     </div>
@@ -88,9 +90,9 @@
   <div class="poll-container hidden">
     <div class="wrapper mx-5 mt-4">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body p-2">
           <button class="btn btn-primary">Create New</button>
-          <button class="btn btn-danger float-right">Delete Selected</button>
+          {{!-- <button class="btn btn-danger float-right">Delete Selected</button> --}}
         </div>
       </div>
 
@@ -99,15 +101,18 @@
   </div>
 
   <div class="issue-container hidden">
-    <h1>issues</h1>
-    {{something}}
+    <div class="wrapper mx-5 mt-4">
+      <h1>Issues</h1>
+      {{something}}
+    </div>
   </div>
 
   <div class="request-container hidden">
-    <h1>requests</h1>
-    {{something}}
+    <div class="wrapper mx-5 mt-4">
+      <h1>Requests</h1>
+      {{something}}
+    </div>
   </div>
 </div>
-
 
 <script src="/js/btnGroup.js"></script>
