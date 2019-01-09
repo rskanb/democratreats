@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Democratreats</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Logout</a>
+      </li>
+  </div>
+</nav>
+
+{{!-- Header --}}
+<div class="jumbotron pt-5 pb-4">
+  <div class="wrapper text-center">
+    <h2>
+      Welcome Admin!
+      <br>
+      <br>
+      Currently Viewing Group X
+    </h2>
+    {{!-- Change to dynamically get Group --}}
+    <br>
+    <p>-- Click here to change Group --</p>
+    <p>"Planned Dropdown Menu"</p>
+  </div>
+</div>
+
+{{!-- <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
+  <div>
+    <a href="/resources"></a>
+  </div>
+</div> --}}
+
+{{!-- Button Group Nav --}}
+
+<div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
+  <label class="btn btn-secondary w-100">
+    <input type="radio" name="options" id="option1" autocomplete="off"> Resources
+  </label>
+  <label class="btn btn-secondary w-100">
+    <input type="radio" name="options" id="option2" autocomplete="off"> Members
+  </label>
+  <label class="btn btn-secondary w-100">
+    <input type="radio" name="options" id="option3" autocomplete="off"> Polls
+  </label>
+  <label class="btn btn-secondary w-100">
+    <input type="radio" name="options" id="option4" autocomplete="off"> Issues
+  </label>
+  <label class="btn btn-secondary w-100">
+    <input type="radio" name="options" id="option5" autocomplete="off"> Requests
+  </label>
+</div>
+
+
+{{!-- Generated Content Here --}}
+{{!-- Clear div on new button active --}}
+<div>
+  {{!-- TODO: Code to grab content based on active button --}}
+  {{!-- Create "Poll" objects via Partials when button has class "active"--}}
+  {{!-- Create "Member" objects via Partials when button has class "active"--}}
+  {{!-- Create "Issues" objects via Partials when button has class "active"--}}
+  {{!-- Create "Requests" objects via Partials when button has class "active"--}}
+  {{something}}
+</div>
+
+
+
+
+<script src="/js/index.js"></script>

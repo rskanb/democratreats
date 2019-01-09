@@ -1,3 +1,4 @@
+
 module.exports = function(sequelize, DataTypes) {
     var Poll = sequelize.define("Poll", {
       name: {
@@ -19,8 +20,21 @@ module.exports = function(sequelize, DataTypes) {
         Poll.hasMany(models.Option, {
           onDelete: "cascade"
         });
+        Poll.belongsTo(models.User, {
+          foreignKey: {
+            allowNull: false
+        }
+        })
       };
 
-    return Poll;
+
+  Poll.associate = function (models) {
+    // Associating Poll with Posts
+    // When an Poll is deleted, also delete any associated Posts
+    Poll.hasMany(models.Option, {
+      onDelete: "cascade"
+    });
   };
-  
+
+  return Poll;
+};
