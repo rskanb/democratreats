@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">Democratreats</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,11 +7,14 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Logout</a>
       </li>
   </div>
 </nav>
@@ -28,10 +31,18 @@
     {{!-- Change to dynamically get Group --}}
     <br>
     <p>-- Click here to change Group --</p>
+    <p>"Planned Dropdown Menu"</p>
   </div>
 </div>
 
+{{!-- <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
+  <div>
+    <a href="/resources"></a>
+  </div>
+</div> --}}
+
 {{!-- Button Group Nav --}}
+
 <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
   <label class="btn btn-secondary w-100">
     <input type="radio" name="options" id="option1" autocomplete="off"> Resources
@@ -50,6 +61,7 @@
   </label>
 </div>
 
+
 {{!-- Generated Content Here --}}
 {{!-- Clear div on new button active --}}
 <div>
@@ -64,5 +76,4 @@
 
 
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
