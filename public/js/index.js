@@ -3,7 +3,7 @@
 var signUpForm = $("form.signup");
 //$("#add-dreamcity").addClass('hidden');
 //$("#add-dreamcity").removeClass('hidden');
-$("#signup-form").on("click", function(){
+$("#signup-form").on("click", function(event){
   event.preventDefault();
   $(".login-container").addClass("hidden");
   $(".signup-container").removeClass("hidden");
