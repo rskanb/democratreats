@@ -1,3 +1,11 @@
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
 .list-group-item {
   line-height: 2.5;
 }
