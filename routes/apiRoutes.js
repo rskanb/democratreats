@@ -2,18 +2,30 @@ var db = require("../models");
 var passport = require("../config/passport");
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/users", function(req, res) {
-    db.User.findAll({}).then(function(dbUsers) {
-      res.json(dbUsers);
-    });
-  });
 
-  // Create a new USER
+  // {successRedirect: "/home", failureRedirect:"/"}
+  app.post("/api/login", passport.authenticate("local"), function(req, res) {
+    // return true;
+    //res.json({value:"true"});
+    res.redirect("/home")
+    });
+
+  // Get all examples
+  // app.get("/api/users", function(req, res) {
+  //   db.User.findAll({}).then(function(dbUsers) {
+  //     res.json(dbUsers);
+  //   });
+  // });
+
+  // Signup & Create a new USER
   app.post("/api/users", function(req, res) {
     console.log(req.body);
     db.User.create(req.body).then(function(dbUser) {
       res.json(dbUser);
+    }).catch(function(err) {
+      console.log(err);
+      res.json(err);
+      // res.status(422).json(err.errors[0].message);
     });
   });
 
@@ -38,4 +50,9 @@ module.exports = function(app) {
     res.json("/home");
   });
 
+  app.get("/logout", function(req,res){
+    req.logout();
+    console.log("logout");
+    res.redirect("/");
+  })
 };

@@ -13,11 +13,10 @@ module.exports = function (sequelize, DataTypes) {
         },
     });
 
-    Group.associate = function (models) {
-        Group.hasMany(models.User, {
-            onDelete: "cascade"
-        });
-    };
+    // Group.associate = function (models) {
+    //     Group.hasMany(models.User, {
+    //     });
+    // };
 
     return Group;
 };
