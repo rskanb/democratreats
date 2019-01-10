@@ -20,3 +20,4 @@ module.exports = function (sequelize, DataTypes) {
 
     return Group;
 };
+//randmom comment to delete

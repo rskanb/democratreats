@@ -29,20 +29,26 @@ module.exports = function(app) {
     });
   });
 
-  // app.get("/home", function(req, res) {
-  //   if (!req.user) {
-  //     // The user is not logged in, send back an empty object
-  //     res.json({});
-  //   }
-  //   else {
-  //     // Otherwise send back the user's email and id
-  //     // Sending back a password, even a hashed password, isn't a good idea
-  //     res.json({
-  //       email: req.user.email,
-  //       id: req.user.id,
-  //     });
-  //   }
-  // });
+  // Create a new POLL
+  app.post("/api/polls", function(req, res) {
+    console.log(req.body);
+    db.Poll.create(req.body).then(function(dbPoll) {
+      res.json(dbPoll);
+    });
+  });
+
+  // Create a new OPTION
+  app.post("/api/options", function(req, res) {
+    console.log(req.body);
+    db.Option.create(req.body).then(function(dbOption) {
+      res.json(dbOption);
+    });
+  });
+
+  // LOG IN
+  app.post("/api/login", passport.authenticate("local"), function(req, res) {
+    res.json("/home");
+  });
 
   app.get("/logout", function(req,res){
     req.logout();
