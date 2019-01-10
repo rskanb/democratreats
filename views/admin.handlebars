@@ -19,61 +19,95 @@
   </div>
 </nav>
 
-{{!-- Header --}}
-<div class="jumbotron pt-5 pb-4">
-  <div class="wrapper text-center">
-    <h2>
-      Welcome Admin!
+<div class="wrapper">
+  {{!-- Header --}}
+  <div class="jumbotron pt-5 pb-4">
+    <div class="wrapper text-center">
+      <h2>
+        Welcome Admin/User!
+        {{!-- check and say hi to admin or user here --}}
+        <br>
+        <br>
+        Currently Viewing Group X
+      </h2>
+      {{!-- Change to dynamically get Group --}}
       <br>
-      <br>
-      Currently Viewing Group X
-    </h2>
-    {{!-- Change to dynamically get Group --}}
-    <br>
-    <p>-- Click here to change Group --</p>
-    <p>"Planned Dropdown Menu"</p>
+
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Click here to change Group
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{!-- Button Group Nav --}}
+  <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
+    <button class="btn btn-primary w-100" id="option1">
+      <input type="radio" name="options" autocomplete="off"> Resources
+    </button>
+    <button class="btn btn-primary w-100" id="option2">
+      <input type="radio" name="options" autocomplete="off"> Members
+    </button>
+    <button class="btn btn-primary w-100" id="option3">
+      <input type="radio" name="options" autocomplete="off"> Polls
+    </button>
+    <button class="btn btn-primary w-100" id="option4">
+      <input type="radio" name="options" autocomplete="off"> Issues
+    </button>
+    <button class="btn btn-primary w-100" id="option5">
+      <input type="radio" name="options" autocomplete="off"> Requests
+    </button>
+  </div>
+
+
+  {{!-- Generated Content Here --}}
+  <div class="resource-container hidden">
+    <h1>resources</h1>
+    {{something}}
+  </div>
+
+  <div class="member-container hidden">
+    <div class="wrapper mx-5 mt-4">
+      <div class="card">
+        <div class="card-body">
+          <button class="btn btn-primary">Add Member</button>
+        </div>
+      </div>
+
+      {{something}}
+    </div>
+  </div>
+
+  <div class="poll-container hidden">
+    <div class="wrapper mx-5 mt-4">
+      <div class="card">
+        <div class="card-body">
+          <button class="btn btn-primary">Create New</button>
+          <button class="btn btn-danger float-right">Delete Selected</button>
+        </div>
+      </div>
+
+      {{something}}
+    </div>
+  </div>
+
+  <div class="issue-container hidden">
+    <h1>issues</h1>
+    {{something}}
+  </div>
+
+  <div class="request-container hidden">
+    <h1>requests</h1>
+    {{something}}
   </div>
 </div>
 
-{{!-- <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
-  <div>
-    <a href="/resources"></a>
-  </div>
-</div> --}}
 
-{{!-- Button Group Nav --}}
-
-<div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
-  <label class="btn btn-secondary w-100">
-    <input type="radio" name="options" id="option1" autocomplete="off"> Resources
-  </label>
-  <label class="btn btn-secondary w-100">
-    <input type="radio" name="options" id="option2" autocomplete="off"> Members
-  </label>
-  <label class="btn btn-secondary w-100">
-    <input type="radio" name="options" id="option3" autocomplete="off"> Polls
-  </label>
-  <label class="btn btn-secondary w-100">
-    <input type="radio" name="options" id="option4" autocomplete="off"> Issues
-  </label>
-  <label class="btn btn-secondary w-100">
-    <input type="radio" name="options" id="option5" autocomplete="off"> Requests
-  </label>
-</div>
-
-
-{{!-- Generated Content Here --}}
-{{!-- Clear div on new button active --}}
-<div>
-  {{!-- TODO: Code to grab content based on active button --}}
-  {{!-- Create "Poll" objects via Partials when button has class "active"--}}
-  {{!-- Create "Member" objects via Partials when button has class "active"--}}
-  {{!-- Create "Issues" objects via Partials when button has class "active"--}}
-  {{!-- Create "Requests" objects via Partials when button has class "active"--}}
-  {{something}}
-</div>
-
-
-
-
-<script src="/js/index.js"></script>
+<script src="/js/btnGroup.js"></script>
