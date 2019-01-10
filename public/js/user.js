@@ -4,8 +4,8 @@ $(document).ready(function() {
   var nameInput = $("#name-input");
   var emailInput = $("#signupemail-input");
   var passwordInput = $("#signuppassword-input");
-  var loginEmail= $("#email-input");
-  var loginPassword = $("#password-input");
+  // var loginEmail= $("#email-input");
+  // var loginPassword = $("#password-input");
 
   $(document).on("submit", ".signup", function(){
 
@@ -42,43 +42,13 @@ $(document).ready(function() {
         emailInput.val(""),
         passwordInput.val(""),
         $(".inline-checkbox").prop('checked', false)
-        $("#email-input").val("");
-        $("#password-input").val("");
+        // $("#email-input").val("");
+        // $("#password-input").val("");
       });
   }
 
-  function loginUser(userData) {
-    $.post("/api/users", userData)
-      .then(function(response){
-        nameInput.val("");
-        emailInput.val(""),
-        passwordInput.val(""),
-        adminStatus.$(".inline-checkbox").is(":unchecked")
-        $("#email-input").val("");
-        $("#password-input").val("");
-      });
-  }
+  
 
 // });
-$(document).on("submit", ".login", function(){
-  event.preventDefault();
-  
-  if (!loginEmail.val().trim()) {
-    return;
-  }
-  var loginEmail= $("#email-input");
-  var loginPassword = $("#password-input");
-
-  // var userData = {
-  //   name: nameInput.val().trim(),
-  //   email: emailInput.val().trim(),
-  //   password: passwordInput.val().trim(),
-  //   admin: adminStatus
-  // }
-  // // Calling the upsertUser function and passing in the value of the name input
-  // upsertUser(userData);
-  // console.log(userData);
-  // loginUser(userData);
-});
 
 });
