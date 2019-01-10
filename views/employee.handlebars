@@ -49,71 +49,34 @@
 <div class="wrapper w-75 mx-auto">
   {{!-- Button Group Nav --}}
   <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
-    <button class="btn btn-primary w-100" id="option1">
-      <input type="radio" name="options" autocomplete="off"> Resources
-    </button>
-    <button class="btn btn-primary w-100" id="option2">
-      <input type="radio" name="options" autocomplete="off"> Members
-    </button>
-    <button class="btn btn-primary w-100" id="option3">
+    <button class="btn btn-primary w-100" id="optionPoll">
       <input type="radio" name="options" autocomplete="off"> Polls
     </button>
-    <button class="btn btn-primary w-100" id="option4">
+    <button class="btn btn-primary w-100" id="optionIssue">
       <input type="radio" name="options" autocomplete="off"> Issues
     </button>
-    <button class="btn btn-primary w-100" id="option5">
+    <button class="btn btn-primary w-100" id="optionrequest">
       <input type="radio" name="options" autocomplete="off"> Requests
     </button>
   </div>
 
-
-  {{!-- Generated Content Here --}}
-  <div class="resource-container hidden">
-    <div class="wrapper mx-5 mt-4">
-      <h1>Resources</h1>
-      {{!-- {{something}} --}}
-    </div>
-  </div>
-
-  <div class="member-container hidden">
-    <div class="wrapper mx-5 mt-4">
-      {{!-- <div class="card">
-        <div class="card-body p-2">
-          <button class="btn btn-primary">Add Member</button>
-          <button class="btn btn-danger float-right">Delete Selected</button>
-        </div>
-      </div> --}}
-
-      {{!-- {{something}} --}}
-    </div>
-  </div>
-
-  <div class="poll-container hidden">
-    <div class="wrapper mx-5 mt-4">
+<div id="content-div">
+    <div class="wrapper mx-5 mt-4" id="dataReturn">
       <div class="card">
         <div class="card-body p-2">
-          <button class="btn btn-primary">Create New</button>
-          {{!-- <button class="btn btn-danger float-right">Delete Selected</button> --}}
+          {{!-- <button class="btn btn-primary">Create New</button>
+          <button class="btn btn-danger float-right">Delete Selected</button> --}}
         </div>
       </div>
-
-      {{!-- {{something}} --}}
-    </div>
+{{!-- 
+<ul>
+{{#each cats}}
+  {{#unless sleepy}}
+    {{> cats/cat-block sleep=true}}
+  {{/unless}}
+{{/each}}
+</ul> --}}
+  </div>
   </div>
 
-  <div class="issue-container hidden">
-    <div class="wrapper mx-5 mt-4">
-      <h1>Issues</h1>
-      {{!-- {{something}} --}}
-    </div>
-  </div>
-
-  <div class="request-container hidden">
-    <div class="wrapper mx-5 mt-4">
-      <h1>Requests</h1>
-      {{!-- {{something}} --}}
-    </div>
-  </div>
-</div>
-
-<script src="/js/btnGroup.js"></script>
+<script src="/js/employee.js"></script>
