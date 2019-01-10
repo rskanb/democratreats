@@ -50,6 +50,20 @@ module.exports = function(app) {
     res.json("/home");
   });
 
+  //Get all poll
+  app.get("/api/poll", function(req,res){
+    console.log(req);
+    console.log("api poll route hit")
+    db.Poll.findAll({}).then(function(dbpoll) {
+      // var pollObj = {
+      //   pollData: dbpoll.pollData
+      // }
+      // //console.log(pollObj.pollData);
+
+      res.json(dbpoll);
+      //res.json(dbpoll)});
+  });
+});
   app.get("/logout", function(req,res){
     req.logout();
     console.log("logout");
