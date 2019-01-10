@@ -62,8 +62,20 @@ module.exports = function(app) {
 
       res.json(dbpoll);
       //res.json(dbpoll)});
-  });
+  })
 });
+  app.delete("/api/poll/:id", function(req, res){
+    console.log(req.params.id);
+    // var id1 = parseInt(req.params.id);
+    // db.Post.destroy({
+    //   where: {
+    //     id: id1
+    //   }
+    // }).then(function(dbPost) {
+    //   res.json(dbPost);
+    });
+
+
   app.get("/logout", function(req,res){
     req.logout();
     console.log("logout");

@@ -66,39 +66,6 @@
     </button>
   </div>
 
-
-  {{!-- Generated Content Here --}}
-  <div class="resource-container hidden">
-    <div class="wrapper mx-5 mt-4">
-      <h1>Resources</h1>
-      {{!-- {{something}} --}}
-    </div>
-  </div>
-
-  <div class="member-container hidden">
-    <div class="wrapper mx-5 mt-4">
-      <h1>Members</h1>
-      {{!-- <div class="card">
-        <div class="card-body p-2">
-          <button class="btn btn-primary">Add Member</button>
-          <button class="btn btn-danger float-right">Delete Selected</button>
-        </div>
-      </div> --}}
-
-      {{!-- {{something}} --}}
-    </div>
-  </div>
-
-  <div class="poll-container hidden">
-    <div class="wrapper mx-5 mt-4">
-      <div class="card">
-        <div class="card-body p-2">
-          <button class="btn btn-primary">Create New</button>
-          {{!-- <button class="btn btn-danger float-right">Delete Selected</button> --}}
-        </div>
-
-        <hr>
-
         <div class="card-body p-2">
           <form>
             <div class="form-group">
@@ -121,28 +88,32 @@
             </div>
             <a class="btn btn-primary btn-lg" href="/">submit this poll</a>
         </div>
-
-
         </form>
       </div>
 
-      {{!-- {{something}} --}}
-    </div>
+<div id="content-div">
+    <div class="wrapper mx-5 mt-4" id="dataReturn">
+      <div class="card">
+        <div class="card-body p-2">
+          {{!-- <button class="btn btn-primary">Create New</button>
+          <button class="btn btn-danger float-right">Delete Selected</button> --}}
+        </div>
+      </div>
+{{!-- 
+<ul>
+{{#each cats}}
+  {{#unless sleepy}}
+    {{> cats/cat-block sleep=true}}
+  {{/unless}}
+{{/each}}
+</ul> --}}
+  </div>
   </div>
 
-  {{!-- <div class="issue-container hidden">
-    <div class="wrapper mx-5 mt-4">
-      <h1>Issues</h1>
-      {{!-- {{something}} --}}
-    </div>
-  </div> --}}
+ 
 
-  <div class="request-container hidden">
-    <div class="wrapper mx-5 mt-4">
-      <h1>Requests</h1>
-      {{!-- {{something}} --}}
-    </div>
-  </div>
-</div>
+ 
+
+
 
 <script src="/js/btnGroup.js"></script>
