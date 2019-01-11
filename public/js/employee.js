@@ -135,46 +135,41 @@ $(document).ready(function () {
 
 
     // This function constructs a post's HTML
-    // function createNewPollRow(poll) {
-    //     //var buttonArray = poll.Options;
-    //     var formattedDate = new Date(poll.createdAt);
-    //     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
-    //     var newPostCard = $("<div>");
-    //     newPostCard.addClass("card");
-    //     var newPostCardHeading = $("<div>");
-    //     newPostCardHeading.addClass("card-header");
-    //     var newPostTitle = $("<h3>");
-    //     var newPostDate = $("<small>");
-    //     var newPostCardBody = $("<div>");
-    //     newPostCardBody.addClass("card-body");
-    //     var newPostBody = $("<p>");
-    //     var newPostOption = $("<p>");
-    //     newPostTitle.text(poll.name + " ");
-    //     newPostBody.text(poll.description);
-    //     newPostDate.text(formattedDate);
-    //     for(var i =0; i<=3; i++){
-    //         var optionBtn = $("<button>");
-    //         optionBtn.text(poll.Options[i].name);
-    //         optionBtn.addClass("option1 btn btn-light btn-lg btn-block");
-    //         optionBtn.attr("data-value", poll.Options[i].id);
-    //         optionBtn.attr("data-value1", poll.id);
-    //         newPostOption.append(optionBtn);
-    //     }
-    //     newPostBody.append(newPostOption);
-    //     newPostTitle.append(newPostDate);
-    //     newPostCardHeading.append(newPostTitle);
-    //     newPostCardBody.append(newPostBody);
-    //     newPostCard.append(newPostCardHeading);
-    //     newPostCard.append(newPostCardBody);
-    //     newPostCard.data("post", poll);
-    //     return newPostCard;
-    // }   //Create new poll function end
+    function createNewPollRow(poll) {
+        //var buttonArray = poll.Options;
+        var formattedDate = new Date(poll.createdAt);
+        formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
+        var newPostCard = $("<div>");
+        newPostCard.addClass("card");
+        var newPostCardHeading = $("<div>");
+        newPostCardHeading.addClass("card-header");
+        var newPostTitle = $("<h3>");
+        var newPostDate = $("<small>");
+        var newPostCardBody = $("<div>");
+        newPostCardBody.addClass("card-body");
+        var newPostBody = $("<p>");
+        var newPostOption = $("<p>");
+        newPostTitle.text(poll.name + " ");
+        newPostBody.text(poll.description);
+        newPostDate.text(formattedDate);
+        for(var i =0; i<=3; i++){
+            var optionBtn = $("<button>");
+            optionBtn.text(poll.Options[i].name);
+            optionBtn.addClass("option1 btn btn-light btn-lg btn-block");
+            optionBtn.attr("data-option-id", poll.Options[i].id);
+            optionBtn.attr("data-poll-id", poll.id);
 
-
-
-
-
-
+            newPostOption.append(optionBtn);
+        }
+        newPostBody.append(newPostOption);
+        newPostTitle.append(newPostDate);
+        newPostCardHeading.append(newPostTitle);
+        newPostCardBody.append(newPostBody);
+        newPostCard.append(newPostCardHeading);
+        newPostCard.append(newPostCardBody);
+        newPostCard.data("post", poll);
+        return newPostCard;
+    }
 
     function hideIssueForm() {
         if (!$("#issue-toolbar").hasClass("hidden")) {

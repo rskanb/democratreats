@@ -47,6 +47,14 @@ module.exports = function (app) {
     });
   });
 
+    // Create a new VOTE
+    app.post("/api/votes", isAuthenticated, function (req, res) {
+      console.log(req.body);
+      db.Vote.create(req.body).then(function (dbVote) {
+        res.json(dbVote);
+      });
+    });
+
 
     // Create a new REQUEST
     app.post("/api/requests", isAuthenticated, function (req, res) {
