@@ -64,7 +64,7 @@ module.exports = function (app) {
         console.log("request API hit");
       });
     });
-  });
+
 
   //Get all poll
   app.get("/api/poll", isAuthenticated, function (req, res) {
