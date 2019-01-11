@@ -28,11 +28,14 @@ $(document).ready(function () {
         // $(".request-container").addClass("hidden");
         $.get("/api/poll").then(function (response) {
             console.log(response);
+            var userId = response[response.length-1].userLoginId;
+            console.log(userId);
             var pollToAdd = [];
             //window.location.href = "/employee";
             for (let i = 0; i < response.length-1; i++) {
                 var htmlPoll = $("<div>");
                 htmlPoll.addClass("poll");
+               
                 // Adding a data-attribute
                 //htmlPoll.attr("data-name", response[i].id);
                 // Providing the initial button text
@@ -61,6 +64,7 @@ $(document).ready(function () {
                         optionBtn.addClass("option1 btn btn-light btn-lg btn-block");
                         optionBtn.attr("data-valueoption", poll.Options[i].id);
                         optionBtn.attr("data-valuepoll", poll.id);
+                        optionBtn.attr("data-userId", userId);
                         newPostOption.append(optionBtn);
                     }
                     newPostBody.append(newPostOption);

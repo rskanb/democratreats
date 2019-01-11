@@ -4,18 +4,19 @@ $(document).ready(function() {
     $(document).on("click", ".option1", function(event){
 
 
-        console.log($(this).data('option-id'));
-        console.log($(this).data('poll-id'));
+        console.log($(this).data('valueoption'));
+        console.log($(this).data('valuepoll'));
 
-        var optionId = $(this).data('option-id');
-        var pollId = $(this).data('poll-id');
+        var optionId = $(this).data('valueoption');
+        var pollId = $(this).data('valuepoll');
+        var userId = $(this).data('userid');
 
         var voteData = {
             OptionId: optionId,
-            votePollId: pollId,
-            foreignKey: pollId
+            PollId: pollId,
+            UserId: userId
         }
-
+        console.log(voteData);
         upsertVote(voteData);
     });
 
