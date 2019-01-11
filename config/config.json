@@ -3,6 +3,7 @@
     "username": "root",
 
     "password": "",
+
     "database": "democratreatsdb",
     "host": "localhost",
     "dialect": "mysql"

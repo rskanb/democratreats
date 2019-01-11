@@ -1,17 +1,13 @@
 $(document).ready(function () {
 
-  // Members Button
+  // Poll Button
   $("#option3").on("click", function () {
-
     event.preventDefault();
-
     // show "Create New" button
     $("#poll-toolbar").removeClass("hidden");
-
     // hide member toolbar
     $("#member-toolbar").addClass("hidden");
     hideMemberForm();
-
 
     //event.stopPropagation();
     $("#content-div").empty();
@@ -34,7 +30,7 @@ $(document).ready(function () {
         pollToAdd.push(createNewRow(response[i]));
       }
       $("#content-div").append(pollToAdd);
-    })
+    });
 
   });
 
@@ -62,37 +58,24 @@ $(document).ready(function () {
     var newPostCard = $("<div>");
     newPostCard.addClass("card");
     var newPostCardHeading = $("<div>");
-
     // card-header
     newPostCardHeading.addClass("card-header");
-
     // delete button
     var deleteBtn = $("<button>");
     deleteBtn.text("X");
     deleteBtn.addClass("delete btn btn-danger");
     deleteBtn.attr("data-value", poll.id);
-
     // edit button
     var editBtn = $("<button>");
     editBtn.text("EDIT");
     editBtn.addClass("edit btn btn-success");
     editBtn.attr("data-value", poll.id);
-
     // header-button container
     var headerBtn = $("<div>");
     headerBtn.addClass("float-right")
     headerBtn.append(editBtn, deleteBtn);
-
     var newPostTitle = $("<h3>");
     var newPostDate = $("<small>");
-    // var newPostAuthor = $("<h5>");
-    // newPostAuthor.text("Written by: " + post.Author.name);
-    // newPostAuthor.css({
-    //   float: "right",
-    //   color: "blue",
-    //   "margin-top":
-    //   "-10px"
-    // });
     var newPostCardBody = $("<div>");
     newPostCardBody.addClass("card-body");
     var newPostBody = $("<p>");
@@ -100,41 +83,38 @@ $(document).ready(function () {
     var newPostOption = $("<p>");
     newPostTitle.text(poll.name + " ");
     newPostBody.text(poll.description);
-    newPostDate.text(formattedDate);
-    for(var i =0; i<=3; i++){
+    newPostDate.text("Opened on " + formattedDate);
+    for (var i = 0; i <= 3; i++) {
       var optionBtn = $("<button>");
       optionBtn.text(poll.Options[i].name);
       optionBtn.addClass("option1 btn btn-light btn-lg btn-block");
       optionBtn.attr("data-value", poll.Options[0].id);
       newPostOption.append(optionBtn);
+
   }
   newPostBody.append(newPostOption);
     newPostTitle.append(newPostDate);
-
     // append card-header buttons
     newPostCardHeading.append(headerBtn);
-
     newPostCardHeading.append(newPostTitle);
+    newPostCardHeading.append(newDateContainer);
+
     // newPostCardHeading.append(newPostAuthor);
     newPostCardBody.append(newPostBody);
     newPostCard.append(newPostCardHeading);
     newPostCard.append(newPostCardBody);
     newPostCard.data("post", poll);
-
     // adds styles margin to card
     newPostCard.addClass("mb-3")
-
     return newPostCard;
   }
 
   // results button =============================================================================
   $("#option1").on("click", function () {
     event.preventDefault();
-
     // Hides Form Creation
     hidePollForm();
     hideMemberForm();
-
     // $(".request-container").removeClass("hidden");
     $("#content-div").empty();
     // $(".poll-container").addClass("hidden");
@@ -143,18 +123,14 @@ $(document).ready(function () {
 
   // members button =============================================================================
   $("#option2").on("click", function () {
-
     // Hides Poll Form Creation
     hidePollForm();
     hideMemberForm();
-
     // show "Create New" button
     $("#member-toolbar").removeClass("hidden");
-
     $("#content-div").empty();
-
     $.get("/api/user").then(function (response) {
-      console.log(response);
+      // console.log(response);
       var userToAdd = [];
       //window.location.href = "/employee";
       for (let i = 0; i < response.length; i++) {
@@ -177,46 +153,140 @@ $(document).ready(function () {
     var newPostCard = $("<div>");
     newPostCard.addClass("card");
     var newPostCardHeading = $("<div>");
+
+    // card-header
     newPostCardHeading.addClass("card-header");
-    var deleteBtn = $("<button>");
-    deleteBtn.text("x");
-    deleteBtn.addClass("delete btn btn-danger");
-    deleteBtn.attr("data-value", user.id);
-    var editBtn = $("<button>");
-    editBtn.text("EDIT");
-    editBtn.addClass("edit btn btn-info");
-    var newPostTitle = $("<h2>");
-    var newPostDate = $("<small>");
+
+    var newPostTitle = $("<h3>");
+    var newPostDate = $("<p>");
+
     var newPostCardBody = $("<div>");
     newPostCardBody.addClass("card-body");
     var newPostBody = $("<p>");
-    newPostTitle.text(user.name + " ");
-    newPostBody.text(user.email);
-    newPostDate.text(formattedDate);
-    newPostTitle.append(newPostDate);
-    newPostCardHeading.append(deleteBtn);
-    newPostCardHeading.append(editBtn);
+
+    var newPostOption = $("<p>");
+
+    newPostTitle.text(user.name);
+    newPostBody.text("Email: " + user.email);
+    newPostDate.text("Join Date: " + formattedDate);
+
+    newPostBody.append(newPostOption);
+    newPostBody.append(newPostDate);
+
     newPostCardHeading.append(newPostTitle);
     // newPostCardHeading.append(newPostAuthor);
     newPostCardBody.append(newPostBody);
     newPostCard.append(newPostCardHeading);
     newPostCard.append(newPostCardBody);
     newPostCard.data("post", user);
+
+    // adds styles margin to card
+    newPostCard.addClass("mb-3")
+
     return newPostCard;
   }
 
   // requests button =============================================================================
   $("#option5").on("click", function () {
+    event.preventDefault();
     // Hides Poll Form Creation
     hidePollForm();
     hideMemberForm();
-
     $("#content-div").empty();
+    $.get("/api/request").then(function (response) {
+      console.log(response);
+      var pollToAdd = [];
+      if (response.length === 0) {
+        alert("Currently, Dont have any Poll");
+      }
+      //window.location.href = "/employee";
+      for (let i = 0; i < response.length; i++) {
+        var htmlPoll = $("<div>");
+        htmlPoll.addClass("example");
+        htmlPoll.text(response[i].name);
+        pollToAdd.push(createNewRequest(response[i]));
+      }
+      $("#content-div").append(pollToAdd);
+    })
+  });  //option 5 end 
 
-  });
+  function createNewRequest(poll) {
+    var formattedDate = new Date(poll.createdAt);
+    formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
+    var newPostCard = $("<div>");
+    newPostCard.addClass("card");
+    var newPostCardHeading = $("<div>");
+    // card-header
+    newPostCardHeading.addClass("card-header");
+    // delete button
+    var deleteBtn = $("<button>");
+    deleteBtn.text("X");
+    deleteBtn.addClass("deleteRequest float-right btn btn-danger");
+    deleteBtn.attr("data-value", poll.id);
+    // header-button container
+    var headerBtn = $("<div>");
+    headerBtn.addClass("float-right")
+    headerBtn.append(deleteBtn);
+    var newPostTitle = $("<h4>");
+    var newPostDate = $("<small>");
+    var newPostCardBody = $("<div>");
+    newPostCardBody.addClass("card-body");
+    var newPostBody = $("<p>");
+    newPostTitle.text(poll.name + " ");
+    newPostBody.text(poll.description);
+    newPostDate.text(formattedDate);
+    newPostTitle.append(newPostDate);
+    // append card-header buttons
+    newPostCardHeading.append(headerBtn);
+    newPostCardHeading.append(newPostTitle);
+    // newPostCardHeading.append(newPostAuthor);
+    newPostCardBody.append(newPostBody);
+    newPostCard.append(newPostCardHeading);
+    newPostCard.append(newPostCardBody);
+    newPostCard.data("post", poll);
+    // adds styles margin to card
+    newPostCard.addClass("mb-3")
+    return newPostCard;
+  }
 
+  //Delete Requests Function Handling 
+  $(document).on("click", "button.deleteRequest", handleRequestDelete);
+
+  function handleRequestDelete() {
+    var requestDelete = $(this).data('value');
+    console.log("delete " + requestDelete);
+    deleteRequest(requestDelete);
+  }
+  function deleteRequest(id) {
+    $.ajax({
+      method: "DELETE",
+      url: "/api/request/" + id
+    })
+      .then(function (response) {
+        console.log(response);
+        $("#content-div").empty();
+        $.get("/api/request").then(function (response) {
+          console.log(response);
+          var pollToAdd = [];
+          if (response.length === 0) {
+            alert("Currently, Dont have any Poll");
+          }
+          //window.location.href = "/employee";
+          for (let i = 0; i < response.length; i++) {
+            var htmlPoll = $("<div>");
+            htmlPoll.addClass("example");
+            htmlPoll.text(response[i].name);
+            pollToAdd.push(createNewRequest(response[i]));
+          }
+          $("#content-div").append(pollToAdd);
+        })
+      });
+  }
+
+
+
+  //Delete Poll Function Handling 
   $(document).on("click", "button.delete", handlePollDelete);
-
   function hidePollForm() {
     if (!$("#poll-toolbar").hasClass("hidden")) {
       $("#poll-toolbar").addClass("hidden");
@@ -226,7 +296,6 @@ $(document).ready(function () {
       };
     };
   };
-
 
   function hideMemberForm() {
     if (!$("#member-toolbar").hasClass("hidden")) {
@@ -270,6 +339,7 @@ $(document).ready(function () {
   }
 
 
+  //Edit POll Request Handling 
   $(document).on("click", "button.edit", handlePollEdit);
   function handlePollEdit() {
     var editPollId = $(this).data('value');
