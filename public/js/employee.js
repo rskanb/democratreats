@@ -30,7 +30,7 @@ $(document).ready(function () {
             console.log(response);
             var pollToAdd = [];
             //window.location.href = "/employee";
-            for (let i = 0; i < response.length; i++) {
+            for (let i = 0; i < response.length-1; i++) {
                 var htmlPoll = $("<div>");
                 htmlPoll.addClass("poll");
                 // Adding a data-attribute

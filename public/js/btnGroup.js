@@ -20,7 +20,7 @@ $(document).ready(function () {
         alert("Currently, Dont have any Poll");
       }
       //window.location.href = "/employee";
-      for (let i = 0; i < response.length; i++) {
+      for (let i = 0; i < response.length-1; i++) {
         var htmlPoll = $("<div>");
         htmlPoll.addClass("example");
         // Adding a data-attribute
