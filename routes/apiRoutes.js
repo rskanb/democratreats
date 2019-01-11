@@ -39,7 +39,7 @@ module.exports = function (app) {
   });
 
     // Create a new REQUEST
-    app.post("/api/requests", function (req, res) {
+    app.post("/api/requests", isAuthenticated, function (req, res) {
       console.log(req.body);
       db.Request.create(req.body).then(function (dbRequest) {
         res.json(dbRequest);
@@ -48,7 +48,6 @@ module.exports = function (app) {
     });
 
   //Get all poll
-
   app.get("/api/poll", isAuthenticated, function(req,res){
     // console.log(req);
     console.log("api getpoll route hit")
@@ -58,6 +57,28 @@ module.exports = function (app) {
       res.json(dbpoll);
     })
   });
+
+  //Get all Request
+  app.get("/api/request", isAuthenticated, function(req,res){
+    // console.log(req);
+    console.log("api get request route hit")
+    db.Request.findAll({}).then(function(dbrequest) {
+      res.json(dbrequest);
+    })
+  });
+
+  //Delete Requests by Admin only
+  app.delete("/api/request/:id", isAuthenticated, function (req, res) {
+    var delReqId = parseInt(req.params.id);
+    console.log("delete request route ended")
+    db.Request.destroy({
+      where: {
+        id: delReqId
+      }
+    }).then(function (dbPost) {
+      res.json(dbPost);
+    });
+  });   //Delete Request Function end 
 
   //Delete Poll Baserd on ID Selected 
   app.delete("/api/poll/:id", isAuthenticated, function (req, res) {
@@ -74,7 +95,7 @@ module.exports = function (app) {
     }).then(function (dbPost) {
       res.json(dbPost);
     });
-  });
+  });   //Delete Poll Function end
 
   app.post("/api/edit/:id", isAuthenticated, function (req, res) {
     var reqId = req.params.id;
