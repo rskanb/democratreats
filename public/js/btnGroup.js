@@ -95,6 +95,7 @@ $("#option3").on("click", function () {
     var editBtn = $("<button>");
     editBtn.text("EDIT");
     editBtn.addClass("edit btn btn-info");
+    editBtn.attr("data-value", poll.id);
     var newPostTitle = $("<h2>");
     var newPostDate = $("<small>");
     // var newPostAuthor = $("<h5>");
@@ -149,5 +150,22 @@ function deletePoll(id) {
         });
 }
 
+$(document).on("click", "button.edit", handlePollEdit);
+function handlePollEdit(){
+  var editPollId = $(this).data('value');
+    console.log("Edit "+ editPollId);
+    editPoll(editPollId);
+}
 
+function editPoll(id) {
+  $.ajax({
+      method: "GET",
+      url: "/api/polledit/" + id
+    })
+      .then(function(response) {
+        //console.log(response);
+       window.location.href= "/admin"
+        //window.location.href = "/home"
+      });
+}
 });

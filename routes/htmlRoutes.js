@@ -18,51 +18,6 @@ module.exports = function (app) {
     });
   });
 
-  // app.get("/", function(req, res) {
-  //   db.Example.findAll({}).then(function(dbExamples) {
-  //     res.render("index", {
-  //       msg: "Welcome!",
-  //       examples: dbExamples
-  //     });
-  //   });
-  // });
-
-  // app.get("/api/login", function(req, res) {
-  //   //console.log(req.user)
-  //     if(req.user){
-  //       res.redirect("/home");
-  //     }
-  //     res.render("index", {
-  //       msg: "Welcome!"
-  //     });
-  // });
-
-
-  // app.get("/employee", function (req, res) {
-  //   res.render("employee", {
-  //     msg: "Welcome!"
-  //   });
-  // });
-
-  // app.get("/admin", function (req, res) {
-  //   res.render("admin", {
-  //     msg: "Welcome!"
-  //   });
-  // });
-
-
-  // app.get("/home", function (req, res) {
-  //   res.render("home", {
-  //     msg: "Welcome!"
-  //   });
-  // });
-
-
-  // app.get("/home", function (req, res) {
-  //   res.render("home", {
-  //     msg: "Welcome!"
-  //   });
-  // });
 
   // Load example page and pass in an example by id
   // app.get("/example/:id", function (req, res) {
@@ -88,23 +43,26 @@ module.exports = function (app) {
         });
       }
     });
-    // console.log("getting to route /home");
-    //console.log(isAuthenticated());
-    // res.partials("home", {
-    //   msg: "Welcome!",
-    // });
   });
 
-  // app.get("/employee", function(req, res) {
-  //       res.render("employee", {
-  //         user: req.user
-  //       });
-    // console.log("getting to route /home");
-    //console.log(isAuthenticated());
-    // res.partials("home", {
-    //   msg: "Welcome!",
-    // });
-  // });
+  app.get("/admin", isAuthenticated, function(req, res) {
+    console.log(req.user);
+    console.log("api edit poll route hit")
+    // db.User.findOne({where:{
+    //   email:
+    // }})
+    // db.Poll.findOne({
+    //   where: {
+    //     id: reqId
+    //   }
+    if(req.user.admin){
+      res.render("admin");
+    } else {
+      res.redirect("*");
+    }
+
+    });
+  
 
 
   // Render 404 page for any unmatched routes

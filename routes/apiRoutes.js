@@ -1,21 +1,13 @@
 var db = require("../models");
 var passport = require("../config/passport");
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
 
   // {successRedirect: "/home", failureRedirect:"/"}
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    // return true;
-    //res.json({value:"true"});
     res.redirect("/home")
     });
-
-  // Get all examples
-  // app.get("/api/users", function(req, res) {
-  //   db.User.findAll({}).then(function(dbUsers) {
-  //     res.json(dbUsers);
-  //   });
-  // });
 
   // Signup & Create a new USER
   app.post("/api/users", function(req, res) {
@@ -45,36 +37,41 @@ module.exports = function(app) {
     });
   });
 
-  // LOG IN
-  app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    res.json("/home");
-  });
+  // // LOG IN
+  // app.post("/api/login", passport.authenticate("local"), function(req, res) {
+  //   res.json("/home");
+  // });
 
   //Get all poll
   app.get("/api/poll", function(req,res){
-    console.log(req);
+    // console.log(req);
     console.log("api poll route hit")
     db.Poll.findAll({}).then(function(dbpoll) {
-      // var pollObj = {
-      //   pollData: dbpoll.pollData
-      // }
-      // //console.log(pollObj.pollData);
-
       res.json(dbpoll);
-      //res.json(dbpoll)});
   })
-});
-  app.delete("/api/poll/:id", function(req, res){
-    console.log(req.params.id);
-    // var id1 = parseInt(req.params.id);
-    // db.Post.destroy({
-    //   where: {
-    //     id: id1
-    //   }
-    // }).then(function(dbPost) {
-    //   res.json(dbPost);
+  });
+
+  //Delete Poll Baserd on ID Selected 
+  app.delete("/api/poll/:id", isAuthenticated, function(req, res){
+    var delId = parseInt(req.params.id);
+    db.Poll.destroy({
+      where: {
+        id: delId
+      }
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
     });
 
+    app.get("/api/polledit/:id", isAuthenticated, function(req, res){
+      //var reqId = { id: parseInt(req.params.id)};
+      if(req.user.admin){
+        //res.json(reqId);
+        res.redirect("/admin");
+     }else {
+        res.redirect("*")
+     }
+    })
 
   app.get("/logout", function(req,res){
     req.logout();

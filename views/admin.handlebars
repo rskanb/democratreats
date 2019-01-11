@@ -8,106 +8,54 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/home">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link" href="/logout">Logout</a>
       </li>
   </div>
 </nav>
 
-<div class="wrapper">
-  {{!-- Header --}}
-  <div class="jumbotron pt-5 pb-4">
-    <div class="wrapper text-center">
-      <h2>
-        Welcome Admin/User!
-        {{!-- check and say hi to admin or user here --}}
-        <br>
-        <br>
-        Currently Viewing Group X
-      </h2>
-      {{!-- Change to dynamically get Group --}}
+<div class="jumbotron pt-5 pb-4">
+  <div class="wrapper text-center">
+    <h2>
+      Welcome Admin/User!
+      {{!-- check and say hi to admin or user here --}}
       <br>
+      <br>
+      Currently Viewing Group X
+    </h2>
+    {{!-- Change to dynamically get Group --}}
+    <br>
 
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Click here to change Group
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Click here to change Group
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+        {{something}}
       </div>
     </div>
-  </div>
-
-  {{!-- Button Group Nav --}}
-  <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
-    <button class="btn btn-primary w-100" id="option1">
-      <input type="radio" name="options" autocomplete="off"> Resources
-    </button>
-    <button class="btn btn-primary w-100" id="option2">
-      <input type="radio" name="options" autocomplete="off"> Members
-    </button>
-    <button class="btn btn-primary w-100" id="option3">
-      <input type="radio" name="options" autocomplete="off"> Polls
-    </button>
-    <button class="btn btn-primary w-100" id="option4">
-      <input type="radio" name="options" autocomplete="off"> Issues
-    </button>
-    <button class="btn btn-primary w-100" id="option5">
-      <input type="radio" name="options" autocomplete="off"> Requests
-    </button>
-  </div>
-
-
-  {{!-- Generated Content Here --}}
-  <div class="resource-container hidden">
-    <h1>resources</h1>
-    {{something}}
-  </div>
-
-  <div class="member-container hidden">
-    <div class="wrapper mx-5 mt-4">
-      <div class="card">
-        <div class="card-body">
-          <button class="btn btn-primary">Add Member</button>
-        </div>
-      </div>
-
-      {{something}}
-    </div>
-  </div>
-
-  <div class="poll-container hidden">
-    <div class="wrapper mx-5 mt-4">
-      <div class="card">
-        <div class="card-body">
-          <button class="btn btn-primary">Create New</button>
-          <button class="btn btn-danger float-right">Delete Selected</button>
-        </div>
-      </div>
-
-      {{something}}
-    </div>
-  </div>
-
-  <div class="issue-container hidden">
-    <h1>issues</h1>
-    {{something}}
-  </div>
-
-  <div class="request-container hidden">
-    <h1>requests</h1>
-    {{something}}
   </div>
 </div>
 
 
-<script src="/js/btnGroup.js"></script>
+
+<div id="content-div">
+    <div class="wrapper mx-5 mt-4" id="dataReturn">
+      <div class="card">
+        <div class="card-body p-2">
+        </div>
+      </div>
+</div>
+</div>
+
+
+<script src="/js/polledit.js"></script>

@@ -11,7 +11,7 @@ module.exports = function (sequelize, DataTypes) {
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
-    },
+    }
   });
 
   Poll.associate = function (models) {

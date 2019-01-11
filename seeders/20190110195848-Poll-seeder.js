@@ -24,6 +24,18 @@ module.exports = {
         description: "Chicken",
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        name: 'First Poll',
+        description: "This is our first poll check",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'Second Poll',
+        description: "This is our second poll Check, for ipsum generator sefarsbgkhf argiuhrlgrli 23456thfxb bief 345yfbvf",
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ], {});
     
