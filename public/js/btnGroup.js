@@ -1,6 +1,7 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-$("#option3").on("click", function () {
+  // Members Button
+  $("#option3").on("click", function () {
 
     event.preventDefault();
 
@@ -16,23 +17,23 @@ $("#option3").on("click", function () {
     $("#content-div").empty();
     // $(".poll-container").removeClass("hidden");
     // $(".issue-container").addClass("hidden");
-    $.get("/api/poll").then(function(response){
-        console.log(response);
-        var pollToAdd = [];
-        if(response.length===0){
-          alert("Currently, Dont have any Poll");
-        }
-        //window.location.href = "/employee";
-        for(let i=0; i<response.length; i++){
-            var htmlPoll = $("<div>");
-            htmlPoll.addClass("example");
-            // Adding a data-attribute
-            //htmlPoll.attr("data-name", response[i].id);
-            // Providing the initial button text
-            htmlPoll.text(response[i].name);
-            pollToAdd.push(createNewRow(response[i]));
-        }
-            $("#content-div").append(pollToAdd);
+    $.get("/api/poll").then(function (response) {
+      console.log(response);
+      var pollToAdd = [];
+      if (response.length === 0) {
+        alert("Currently, Dont have any Poll");
+      }
+      //window.location.href = "/employee";
+      for (let i = 0; i < response.length; i++) {
+        var htmlPoll = $("<div>");
+        htmlPoll.addClass("example");
+        // Adding a data-attribute
+        //htmlPoll.attr("data-name", response[i].id);
+        // Providing the initial button text
+        htmlPoll.text(response[i].name);
+        pollToAdd.push(createNewRow(response[i]));
+      }
+      $("#content-div").append(pollToAdd);
     })
 
   });
@@ -61,15 +62,27 @@ $("#option3").on("click", function () {
     var newPostCard = $("<div>");
     newPostCard.addClass("card");
     var newPostCardHeading = $("<div>");
+
+    // card-header
     newPostCardHeading.addClass("card-header");
+
+    // delete button
     var deleteBtn = $("<button>");
-    deleteBtn.text("x");
+    deleteBtn.text("X");
     deleteBtn.addClass("delete btn btn-danger");
     deleteBtn.attr("data-value", poll.id);
+
+    // edit button
     var editBtn = $("<button>");
     editBtn.text("EDIT");
-    editBtn.addClass("edit btn btn-info");
+    editBtn.addClass("edit btn btn-success");
     editBtn.attr("data-value", poll.id);
+
+    // header-button container
+    var headerBtn = $("<div>");
+    headerBtn.addClass("float-right")
+    headerBtn.append(editBtn, deleteBtn);
+
     var newPostTitle = $("<h3>");
     var newPostDate = $("<small>");
     // var newPostAuthor = $("<h5>");
@@ -83,18 +96,24 @@ $("#option3").on("click", function () {
     var newPostCardBody = $("<div>");
     newPostCardBody.addClass("card-body");
     var newPostBody = $("<p>");
-    newPostTitle.text(poll.name + " ");
+    newPostTitle.text(poll.name + " - ");
     newPostBody.text(poll.description);
     newPostDate.text(formattedDate);
     newPostTitle.append(newPostDate);
-    newPostCardHeading.append(deleteBtn);
-    newPostCardHeading.append(editBtn);
+
+    // append card-header buttons
+    newPostCardHeading.append(headerBtn);
+
     newPostCardHeading.append(newPostTitle);
     // newPostCardHeading.append(newPostAuthor);
     newPostCardBody.append(newPostBody);
     newPostCard.append(newPostCardHeading);
     newPostCard.append(newPostCardBody);
     newPostCard.data("post", poll);
+
+    // adds styles margin to card
+    newPostCard.addClass("mb-3")
+
     return newPostCard;
   }
 
@@ -224,56 +243,56 @@ $("#option3").on("click", function () {
   }
   function deletePoll(id) {
     $.ajax({
-        method: "DELETE",
-        url: "/api/poll/" + id
-      })
-        .then(function(response) {
+      method: "DELETE",
+      url: "/api/poll/" + id
+    })
+      .then(function (response) {
+        console.log(response);
+        $("#content-div").empty();
+        $.get("/api/poll").then(function (response) {
           console.log(response);
-          $("#content-div").empty();
-          $.get("/api/poll").then(function(response){
-            console.log(response);
-            var pollToAdd = [];
-            //window.location.href = "/employee";
-            for(let i=0; i<response.length; i++){
-                var editPoll = $("<div>");
-                editPoll.addClass("example");
-                // Adding a data-attribute
-                //htmlPoll.attr("data-name", response[i].id);
-                // Providing the initial button text
-                editPoll.text(response[i].name);
-                pollToAdd.push(createNewRow(response[i]));
-            }
-                $("#content-div").append(pollToAdd);
+          var pollToAdd = [];
+          //window.location.href = "/employee";
+          for (let i = 0; i < response.length; i++) {
+            var editPoll = $("<div>");
+            editPoll.addClass("example");
+            // Adding a data-attribute
+            //htmlPoll.attr("data-name", response[i].id);
+            // Providing the initial button text
+            editPoll.text(response[i].name);
+            pollToAdd.push(createNewRow(response[i]));
+          }
+          $("#content-div").append(pollToAdd);
         });
-        });
-}
+      });
+  }
 
 
-$(document).on("click", "button.edit", handlePollEdit);
-function handlePollEdit(){
-  var editPollId = $(this).data('value');
-    console.log("Edit "+ editPollId);
+  $(document).on("click", "button.edit", handlePollEdit);
+  function handlePollEdit() {
+    var editPollId = $(this).data('value');
+    console.log("Edit " + editPollId);
     editPoll(editPollId);
-}
+  }
 
-function editPoll(id) {
-  $.ajax({
+  function editPoll(id) {
+    $.ajax({
       method: "POST",
       url: "/api/edit/" + id
     })
-      .then(function(response) {
+      .then(function (response) {
         console.log(response);
         var pollToEdit = []
         $("#content-div").empty();
-      //window.location.href= "/admin"
-      //window.location.href = "/home"
-      var htmlPoll = $("<div>");
-      htmlPoll.attr(contenteditable="true");
-      htmlPoll.text(response.name);
-      pollToEdit.push(editNewRow(response));
-      $("#content-div").append(pollToEdit);
-  });
-}
+        //window.location.href= "/admin"
+        //window.location.href = "/home"
+        var htmlPoll = $("<div>");
+        htmlPoll.attr(contenteditable = "true");
+        htmlPoll.text(response.name);
+        pollToEdit.push(editNewRow(response));
+        $("#content-div").append(pollToEdit);
+      });
+  }
 });
 
 function editNewRow(poll) {
@@ -281,7 +300,7 @@ function editNewRow(poll) {
   newPostEdit.addClass("card");
   var newPostEditHeading = $("<div>");
   newPostEditHeading.addClass("card-header");
-  newPostEditHeading.attr('contentEditable','true');
+  newPostEditHeading.attr('contentEditable', 'true');
   var editPostBtn = $("<button>");
   editPostBtn.text("EDIT");
   editPostBtn.addClass("editpoll btn btn-info");
@@ -298,8 +317,8 @@ function editNewRow(poll) {
   var newPostEditBody = $("<div>");
   newPostEditBody.addClass("card-body cardEdit");
   var newPostEditBody = $("<p id='story'>");
-  newPostEditBody.attr('contentEditable','true');
-  editPostBtn.attr('contentEditable','false');
+  newPostEditBody.attr('contentEditable', 'true');
+  editPostBtn.attr('contentEditable', 'false');
   editPostTitle.text(poll.name + " ");
   newPostEditBody.text(poll.description);
   newPostEditBody.append(editPostBtn);
@@ -312,22 +331,22 @@ function editNewRow(poll) {
   return newPostEdit;
 }
 
-$(document).on("click", "button.editpoll", function(event){
+$(document).on("click", "button.editpoll", function (event) {
   event.preventDefault();
   var editPollId = $(this).data('value');
   var title = $('#title').text();
   var story = $('#story').text();
   var updateData = {
-    id : editPollId,
+    id: editPollId,
     name: title,
     description: story
-    }
+  }
   console.log(updateData)
-    updatePoll(updateData)
+  updatePoll(updateData)
   //console.log(""+ editPollId + title + story);
 });
 
-function updatePoll(updatedPollData){
+function updatePoll(updatedPollData) {
   // $.post("/api/update", updatedPollData).then(function(response){
   //   console.log(response)
   // });
@@ -336,8 +355,8 @@ function updatePoll(updatedPollData){
     url: "/api/update",
     data: updatedPollData
   })
-    .then(function() {
-        //console.log(response);
+    .then(function () {
+      //console.log(response);
       window.location.href = "/home";
     });
 }
