@@ -83,7 +83,7 @@ $(document).ready(function () {
     var newPostOption = $("<p>");
     newPostTitle.text(poll.name + " ");
     newPostBody.text(poll.description);
-    newPostDate.text("Opened on " + formattedDate);
+    newPostDate.text(formattedDate);
     for (var i = 0; i <= 3; i++) {
       var optionBtn = $("<button>");
       optionBtn.text(poll.Options[i].name);
@@ -97,9 +97,6 @@ $(document).ready(function () {
     // append card-header buttons
     newPostCardHeading.append(headerBtn);
     newPostCardHeading.append(newPostTitle);
-    newPostCardHeading.append(newDateContainer);
-
-    // newPostCardHeading.append(newPostAuthor);
     newPostCardBody.append(newPostBody);
     newPostCard.append(newPostCardHeading);
     newPostCard.append(newPostCardBody);
