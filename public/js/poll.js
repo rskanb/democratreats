@@ -1,6 +1,4 @@
 $(document).ready(function() {
-  console.log("CHICKEN")
-
 
   // Getting references to the name input and other poll information
   var currentPollId = 0
@@ -15,7 +13,6 @@ $(document).ready(function() {
   
   $(document).on("click", ".poll-submit", function(event){
   
-  
   // A function to handle what happens when the form is submitted to create a new poll
   // function handleUserFormSubmit(event) {
     event.preventDefault();
@@ -24,22 +21,16 @@ $(document).ready(function() {
     if (!nameInput.val().trim()) {
       return;
     }
-  
     var pollData = {
       name: nameInput.val().trim(),
       description: descriptionInput.val(),
-  
     }
-
      upsertPoll(pollData);
-
 
       // Calling the upsertPoll and upserOption function and passing in the values from the inputs
   
     // upsertOption(options);
     console.log(pollData);
-
-
 
     });
   
@@ -60,7 +51,6 @@ $(document).ready(function() {
             upsertOption(optionData);
             console.log("the name of the option is "+options[i]);
           };
-
           // nameInput.val("");
           // emailInput.val(""),
           // passwordInput.val(""),
@@ -88,16 +78,13 @@ $(document).ready(function() {
     //       console.log(response);
     //     });
     // }
-  
 //------ ADDING OPTIONS---------------------
     $(".submit-option").on("click", function(event) {
       event.preventDefault();
       // This line grabs the input from the textbox
       var option = $("#option-input").val().trim();
-
       // Adding movie from the textbox to our array
       options.push(option);
-
       // Calling renderButtons which handles the processing of our movie array
       renderOptions();
     });
@@ -119,42 +106,7 @@ $(document).ready(function() {
           a.text((i+1) + ". " + options[i]);
           // Adding the button to the HTML
           $("#options-area").append(a);
-     
     };
 };
 
-    // function loginUser(userData) {
-    //   $.post("/api/users", userData)
-    //     .then(function(response){
-    //       nameInput.val("");
-    //       emailInput.val(""),
-    //       passwordInput.val(""),
-    //       adminStatus.$(".inline-checkbox").is(":unchecked")
-    //       $("#email-input").val("");
-    //       $("#password-input").val("");
-    //     });
-    // }
-  
-  // });
-  // $(document).on("submit", ".login", function(event){
-  //   event.preventDefault();
-    
-  //   if (!loginEmail.val().trim()) {
-  //     return;
-  //   }
-  //   var loginEmail= $("#email-input");
-  //   var loginPassword = $("#password-input");
-  
-  //   // var userData = {
-  //   //   name: nameInput.val().trim(),
-  //   //   email: emailInput.val().trim(),
-  //   //   password: passwordInput.val().trim(),
-  //   //   admin: adminStatus
-  //   // }
-  //   // // Calling the upsertUser function and passing in the value of the name input
-  //   // upsertUser(userData);
-  //   // console.log(userData);
-  //   // loginUser(userData);
-  // });
-  
   });

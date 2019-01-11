@@ -23,6 +23,8 @@ $(document).ready(function () {
         $.post("/api/requests", userData)
           .then(function(response){
               console.log(response);
+              $("#request-name-input").val("");
+              $("#request-description-input").val("");
           });
         };      
 });
