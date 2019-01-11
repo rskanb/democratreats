@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  // Members Button
+  // Poll Button
   $("#option3").on("click", function () {
     event.preventDefault();
     // show "Create New" button
@@ -30,7 +30,7 @@ $(document).ready(function () {
         pollToAdd.push(createNewRow(response[i]));
       }
       $("#content-div").append(pollToAdd);
-    })
+    });
 
   });
 
@@ -79,22 +79,26 @@ $(document).ready(function () {
     var newPostCardBody = $("<div>");
     newPostCardBody.addClass("card-body");
     var newPostBody = $("<p>");
+
     var newPostOption = $("<p>");
     newPostTitle.text(poll.name + " ");
     newPostBody.text(poll.description);
-    newPostDate.text(formattedDate);
-    for(var i =0; i<=3; i++){
+    newPostDate.text("Opened on " + formattedDate);
+    for (var i = 0; i <= 3; i++) {
       var optionBtn = $("<button>");
       optionBtn.text(poll.Options[i].name);
       optionBtn.addClass("option1 btn btn-light btn-lg btn-block");
       optionBtn.attr("data-value", poll.Options[0].id);
       newPostOption.append(optionBtn);
+
   }
   newPostBody.append(newPostOption);
     newPostTitle.append(newPostDate);
     // append card-header buttons
     newPostCardHeading.append(headerBtn);
     newPostCardHeading.append(newPostTitle);
+    newPostCardHeading.append(newDateContainer);
+
     // newPostCardHeading.append(newPostAuthor);
     newPostCardBody.append(newPostBody);
     newPostCard.append(newPostCardHeading);
@@ -126,7 +130,7 @@ $(document).ready(function () {
     $("#member-toolbar").removeClass("hidden");
     $("#content-div").empty();
     $.get("/api/user").then(function (response) {
-      console.log(response);
+      // console.log(response);
       var userToAdd = [];
       //window.location.href = "/employee";
       for (let i = 0; i < response.length; i++) {
@@ -149,31 +153,36 @@ $(document).ready(function () {
     var newPostCard = $("<div>");
     newPostCard.addClass("card");
     var newPostCardHeading = $("<div>");
+
+    // card-header
     newPostCardHeading.addClass("card-header");
-    var deleteBtn = $("<button>");
-    deleteBtn.text("x");
-    deleteBtn.addClass("delete btn btn-danger");
-    deleteBtn.attr("data-value", user.id);
-    var editBtn = $("<button>");
-    editBtn.text("EDIT");
-    editBtn.addClass("edit btn btn-info");
-    var newPostTitle = $("<h2>");
-    var newPostDate = $("<small>");
+
+    var newPostTitle = $("<h3>");
+    var newPostDate = $("<p>");
+
     var newPostCardBody = $("<div>");
     newPostCardBody.addClass("card-body");
     var newPostBody = $("<p>");
-    newPostTitle.text(user.name + " ");
-    newPostBody.text(user.email);
-    newPostDate.text(formattedDate);
-    newPostTitle.append(newPostDate);
-    newPostCardHeading.append(deleteBtn);
-    newPostCardHeading.append(editBtn);
+
+    var newPostOption = $("<p>");
+
+    newPostTitle.text(user.name);
+    newPostBody.text("Email: " + user.email);
+    newPostDate.text("Join Date: " + formattedDate);
+
+    newPostBody.append(newPostOption);
+    newPostBody.append(newPostDate);
+
     newPostCardHeading.append(newPostTitle);
     // newPostCardHeading.append(newPostAuthor);
     newPostCardBody.append(newPostBody);
     newPostCard.append(newPostCardHeading);
     newPostCard.append(newPostCardBody);
     newPostCard.data("post", user);
+
+    // adds styles margin to card
+    newPostCard.addClass("mb-3")
+
     return newPostCard;
   }
 
@@ -400,6 +409,7 @@ $(document).on("click", "button.editpoll", function (event) {
   updatePoll(updateData)
   //console.log(""+ editPollId + title + story);
 });
+
 
 function updatePoll(updatedPollData){
   $.ajax({

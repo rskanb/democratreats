@@ -1,6 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
   var Vote = sequelize.define("Vote", {
-    
+    voteOptionId: {
+        type: DataTypes.INTEGER
+    },
+    votePollId: {
+        type: DataTypes.INTEGER
+    }
   });
 
   Vote.associate = function (models) {
