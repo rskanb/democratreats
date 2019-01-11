@@ -38,6 +38,15 @@ module.exports = function (app) {
     });
   });
 
+    // Create a new REQUEST
+    app.post("/api/requests", function (req, res) {
+      console.log(req.body);
+      db.Request.create(req.body).then(function (dbRequest) {
+        res.json(dbRequest);
+        console.log("request API hit");
+      });
+    });
+
   //Get all poll
   app.get("/api/poll", function (req, res) {
     // console.log(req);
