@@ -119,7 +119,9 @@ $(document).ready(function () {
             var optionBtn = $("<button>");
             optionBtn.text(poll.Options[i].name);
             optionBtn.addClass("option1 btn btn-light btn-lg btn-block");
-            optionBtn.attr("data-value", poll.Options[0].id);
+            optionBtn.attr("data-option-id", poll.Options[i].id);
+            optionBtn.attr("data-poll-id", poll.id);
+
             newPostOption.append(optionBtn);
         }
         newPostBody.append(newPostOption);
