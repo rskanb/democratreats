@@ -65,6 +65,7 @@ $(document).ready(function () {
 
     // hide member toolbar
     $("#member-toolbar").addClass("hidden");
+    hideMemberForm();
 
 
     //event.stopPropagation();
