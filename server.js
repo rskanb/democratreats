@@ -10,6 +10,7 @@ var cookieParser = require('cookie-parser');
 var app = express();
 var PORT = process.env.PORT || 3000;
 
+// Handlebars
 app.engine("handlebars",exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
@@ -23,20 +24,15 @@ app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Handlebars
-
 // Routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
-
 // syncOptions = { force: false };
-
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
 // if (process.env.NODE_ENV === "test") {
 //   syncOptions.force = true;
 // }
-
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {

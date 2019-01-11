@@ -1,10 +1,4 @@
 $(document).ready(function () {
-    // This file just does a GET request to figure out which user is logged in
-    // and updates the HTML on the page
-    // $.get("/home").then(function(data) {
-    // //   $(".member-name").text(data.email);
-    // });
-
     $("#optionResult").on("click", function () {
         event.preventDefault();
 
@@ -38,13 +32,13 @@ $(document).ready(function () {
             //window.location.href = "/employee";
             for (let i = 0; i < response.length; i++) {
                 var htmlPoll = $("<div>");
-                htmlPoll.addClass("example");
+                htmlPoll.addClass("poll");
                 // Adding a data-attribute
                 //htmlPoll.attr("data-name", response[i].id);
                 // Providing the initial button text
                 htmlPoll.text(response[i].name);
 
-                pollToAdd.push(createNewRow(response[i]));
+                pollToAdd.push(createNewPollRow(response[i]));
             }
             $("#content-div").append(pollToAdd);
         })
@@ -104,48 +98,39 @@ $(document).ready(function () {
     //   }
 
     // This function constructs a post's HTML
-    function createNewRow(poll) {
+    function createNewPollRow(poll) {
+        //var buttonArray = poll.Options;
         var formattedDate = new Date(poll.createdAt);
         formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
         var newPostCard = $("<div>");
         newPostCard.addClass("card");
         var newPostCardHeading = $("<div>");
         newPostCardHeading.addClass("card-header");
-        //var deleteBtn = $("<button>");
-        //deleteBtn.text("x");
-        //deleteBtn.addClass("delete btn btn-danger");
-        //deleteBtn.attr("data-value", poll.id);
-        //var editBtn = $("<button>");
-        //editBtn.text("EDIT");
-        //editBtn.addClass("edit btn btn-info");
-        var newPostTitle = $("<h2>");
+        var newPostTitle = $("<h3>");
         var newPostDate = $("<small>");
-        // var newPostAuthor = $("<h5>");
-        // newPostAuthor.text("Written by: " + post.Author.name);
-        // newPostAuthor.css({
-        //   float: "right",
-        //   color: "blue",
-        //   "margin-top":
-        //   "-10px"
-        // });
         var newPostCardBody = $("<div>");
         newPostCardBody.addClass("card-body");
         var newPostBody = $("<p>");
+        var newPostOption = $("<p>");
         newPostTitle.text(poll.name + " ");
         newPostBody.text(poll.description);
         newPostDate.text(formattedDate);
+        for(var i =0; i<=3; i++){
+            var optionBtn = $("<button>");
+            optionBtn.text(poll.Options[i].name);
+            optionBtn.addClass("option1 btn btn-light btn-lg btn-block");
+            optionBtn.attr("data-value", poll.Options[0].id);
+            newPostOption.append(optionBtn);
+        }
+        newPostBody.append(newPostOption);
         newPostTitle.append(newPostDate);
-        //newPostCardHeading.append(deleteBtn);
-        //newPostCardHeading.append(editBtn);
         newPostCardHeading.append(newPostTitle);
-        // newPostCardHeading.append(newPostAuthor);
         newPostCardBody.append(newPostBody);
         newPostCard.append(newPostCardHeading);
         newPostCard.append(newPostCardBody);
         newPostCard.data("post", poll);
         return newPostCard;
     }
-
     function hideIssueForm() {
         if (!$("#issue-toolbar").hasClass("hidden")) {
             $("#issue-toolbar").addClass("hidden");
@@ -155,7 +140,6 @@ $(document).ready(function () {
             };
         };
     };
-
     function hideRequestForm() {
         if (!$("#request-toolbar").hasClass("hidden")) {
             $("#request-toolbar").addClass("hidden");

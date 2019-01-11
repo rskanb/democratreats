@@ -47,11 +47,6 @@ $(document).ready(function() {
       password: password
     }).then(function(response) {
       window.location.href = "/home";
-      // $.get("/home").then(function(response){
-      //   console.log("done");
-      // })
-      // window.location.replace(data);
-      // If there's an error, log the error
     }).catch(function(err) {
       // console.log(err);
       alert(err);

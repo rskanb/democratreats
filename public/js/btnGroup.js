@@ -96,9 +96,19 @@ $(document).ready(function () {
     var newPostCardBody = $("<div>");
     newPostCardBody.addClass("card-body");
     var newPostBody = $("<p>");
-    newPostTitle.text(poll.name + " - ");
+
+    var newPostOption = $("<p>");
+    newPostTitle.text(poll.name + " ");
     newPostBody.text(poll.description);
     newPostDate.text(formattedDate);
+    for(var i =0; i<=3; i++){
+      var optionBtn = $("<button>");
+      optionBtn.text(poll.Options[i].name);
+      optionBtn.addClass("option1 btn btn-light btn-lg btn-block");
+      optionBtn.attr("data-value", poll.Options[0].id);
+      newPostOption.append(optionBtn);
+  }
+  newPostBody.append(newPostOption);
     newPostTitle.append(newPostDate);
 
     // append card-header buttons
@@ -177,14 +187,6 @@ $(document).ready(function () {
     editBtn.addClass("edit btn btn-info");
     var newPostTitle = $("<h2>");
     var newPostDate = $("<small>");
-    // var newPostAuthor = $("<h5>");
-    // newPostAuthor.text("Written by: " + post.Author.name);
-    // newPostAuthor.css({
-    //   float: "right",
-    //   color: "blue",
-    //   "margin-top":
-    //   "-10px"
-    // });
     var newPostCardBody = $("<div>");
     newPostCardBody.addClass("card-body");
     var newPostBody = $("<p>");
@@ -306,14 +308,6 @@ function editNewRow(poll) {
   editPostBtn.addClass("editpoll btn btn-info");
   editPostBtn.attr("data-value", poll.id);
   var editPostTitle = $("<h3 id='title'>");
-  // var newPostAuthor = $("<h5>");
-  // newPostAuthor.text("Written by: " + post.Author.name);
-  // newPostAuthor.css({
-  //   float: "right",
-  //   color: "blue",
-  //   "margin-top":
-  //   "-10px"
-  // });
   var newPostEditBody = $("<div>");
   newPostEditBody.addClass("card-body cardEdit");
   var newPostEditBody = $("<p id='story'>");
@@ -346,10 +340,8 @@ $(document).on("click", "button.editpoll", function (event) {
   //console.log(""+ editPollId + title + story);
 });
 
-function updatePoll(updatedPollData) {
-  // $.post("/api/update", updatedPollData).then(function(response){
-  //   console.log(response)
-  // });
+
+function updatePoll(updatedPollData){
   $.ajax({
     method: "PUT",
     url: "/api/update",
