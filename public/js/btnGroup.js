@@ -1,86 +1,97 @@
-$(document).ready(function() {
-//     // This file just does a GET request to figure out which user is logged in
-//     // and updates the HTML on the page
-//     $.get("/home").then(function(data) {
-//     //   $(".member-name").text(data.email);
-//     });
-//   });
+$(document).ready(function () {
+  //     // This file just does a GET request to figure out which user is logged in
+  //     // and updates the HTML on the page
+  //     $.get("/home").then(function(data) {
+  //     //   $(".member-name").text(data.email);
+  //     });
+  //   });
 
 
-// $("#option1").on("click", function () {
-//     event.preventDefault();
-//     $(".resource-container").removeClass("hidden");
+  // $("#option1").on("click", function () {
+  //     event.preventDefault();
+  //     $(".resource-container").removeClass("hidden");
 
-//     $(".member-container").addClass("hidden");
-//     $(".poll-container").addClass("hidden");
-//     $(".issue-container").addClass("hidden");
-//     $(".request-container").addClass("hidden");
-// });
+  //     $(".member-container").addClass("hidden");
+  //     $(".poll-container").addClass("hidden");
+  //     $(".issue-container").addClass("hidden");
+  //     $(".request-container").addClass("hidden");
+  // });
 
-// $("#option2").on("click", function () {
-//     event.preventDefault();
-//     $(".member-container").removeClass("hidden");
+  // $("#option2").on("click", function () {
+  //     event.preventDefault();
+  //     $(".member-container").removeClass("hidden");
 
-//     $(".resource-container").addClass("hidden");
-//     $(".poll-container").addClass("hidden");
-//     $(".issue-container").addClass("hidden");
-//     $(".request-container").addClass("hidden");
-// });
+  //     $(".resource-container").addClass("hidden");
+  //     $(".poll-container").addClass("hidden");
+  //     $(".issue-container").addClass("hidden");
+  //     $(".request-container").addClass("hidden");
+  // });
 
-// $("#option3").on("click", function () {
-//     event.preventDefault();
-//     $(".poll-container").removeClass("hidden");
+  // $("#option3").on("click", function () {
+  //     event.preventDefault();
+  //     $(".poll-container").removeClass("hidden");
 
-//     $(".resource-container").addClass("hidden");
-//     $(".member-container").addClass("hidden");
-//     $(".issue-container").addClass("hidden");
-//     $(".request-container").addClass("hidden");
-// });
+  //     $(".resource-container").addClass("hidden");
+  //     $(".member-container").addClass("hidden");
+  //     $(".issue-container").addClass("hidden");
+  //     $(".request-container").addClass("hidden");
+  // });
 
-// $("#option4").on("click", function () {
-//     event.preventDefault();
-//     $(".issue-container").removeClass("hidden");
+  // $("#option4").on("click", function () {
+  //     event.preventDefault();
+  //     $(".issue-container").removeClass("hidden");
 
-//     $(".resource-container").addClass("hidden");
-//     $(".member-container").addClass("hidden");
-//     $(".poll-container").addClass("hidden");
-//     $(".request-container").addClass("hidden");
-// });
+  //     $(".resource-container").addClass("hidden");
+  //     $(".member-container").addClass("hidden");
+  //     $(".poll-container").addClass("hidden");
+  //     $(".request-container").addClass("hidden");
+  // });
 
-// $("#option5").on("click", function () {
-//     event.preventDefault();
-//     $(".request-container").removeClass("hidden");
+  // $("#option5").on("click", function () {
+  //     event.preventDefault();
+  //     $(".request-container").removeClass("hidden");
 
-//     $(".resource-container").addClass("hidden");
-//     $(".member-container").addClass("hidden");
-//     $(".poll-container").addClass("hidden");
-//     $(".issue-container").addClass("hidden");
+  //     $(".resource-container").addClass("hidden");
+  //     $(".member-container").addClass("hidden");
+  //     $(".poll-container").addClass("hidden");
+  //     $(".issue-container").addClass("hidden");
 
-$("#option3").on("click", function () {
+  $("#option3").on("click", function () {
     event.preventDefault();
+
+    $("#poll-toolbar").removeClass("hidden");
+
     //event.stopPropagation();
     $("#content-div").empty();
     // $(".poll-container").removeClass("hidden");
     // $(".issue-container").addClass("hidden");
     // $(".request-container").addClass("hidden");
-    $.get("/api/poll").then(function(response){
-        console.log(response);
-        var pollToAdd = [];
-        //window.location.href = "/employee";
-        for(let i=0; i<response.length; i++){
-            var htmlPoll = $("<div>");
-            htmlPoll.addClass("example");
-            // Adding a data-attribute
-            //htmlPoll.attr("data-name", response[i].id);
-            // Providing the initial button text
-            htmlPoll.text(response[i].name);
-            
-            pollToAdd.push(createNewRow(response[i]));
-        }
-            $("#content-div").append(pollToAdd);
-    })
+    $.get("/api/poll").then(function (response) {
+      console.log(response);
+      var pollToAdd = [];
+      //window.location.href = "/employee";
+      for (let i = 0; i < response.length; i++) {
+        var htmlPoll = $("<div>");
+        htmlPoll.addClass("example");
+        // Adding a data-attribute
+        //htmlPoll.attr("data-name", response[i].id);
+        // Providing the initial button text
+        htmlPoll.text(response[i].name);
+
+        pollToAdd.push(createNewRow(response[i]));
+      }
+      $("#content-div").append(pollToAdd);
+    });
   });
-  
+
+  $("#poll-form-btn").on("click", function () {
+    if ($("#poll-form").hasClass("hidden")) {
+      $("#poll-form").removeClass("hidden");
+    } else {
+      $("#poll-form").addClass("hidden");
+    }
+  });
+
   function createNewRow(poll) {
     var formattedDate = new Date(poll.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
@@ -122,32 +133,66 @@ $("#option3").on("click", function () {
     newPostCard.data("post", poll);
     return newPostCard;
   }
-  
 
+  // results button
   $("#option1").on("click", function () {
     event.preventDefault();
+
+    // Hides Poll Form Creation
+    hidePollForm();
+
     // $(".request-container").removeClass("hidden");
     $("#content-div").empty();
     // $(".poll-container").addClass("hidden");
     // $(".issue-container").addClass("hidden");
-});
+  });
 
-$(document).on("click", "button.delete", handlePollDelete);
+  // members button
+  $("#option2").on("click", function () {
 
-function handlePollDelete() {
+    // Hides Poll Form Creation
+    hidePollForm();
+
+    $("#content-div").empty();
+
+  });
+
+  // requests button
+  $("#option5").on("click", function () {
+    // Hides Poll Form Creation
+    hidePollForm();
+
+    $("#content-div").empty();
+
+  });
+
+  $(document).on("click", "button.delete", handlePollDelete);
+
+  function hidePollForm() {
+    if (!$("#poll-toolbar").hasClass("hidden")) {
+      $("#poll-toolbar").addClass("hidden");
+
+      if (!$("#poll-form").hasClass("hidden")) {
+        $("#poll-form").addClass("hidden");
+      };
+    };
+  };
+
+  function handlePollDelete() {
     var currentPoll = $(this).data('value');
-    console.log("delete "+currentPoll);
+    console.log("delete " + currentPoll);
     deletePoll(currentPoll);
   }
-function deletePoll(id) {
+  function deletePoll(id) {
     $.ajax({
-        method: "DELETE",
-        url: "/api/poll/" + id
-      })
-        .then(function(response) {
-          console.log(response);
-        });
-}
+      method: "DELETE",
+      url: "/api/poll/" + id
+    })
+      .then(function (response) {
+        console.log(response);
+      });
+  }
 
 
 });
+

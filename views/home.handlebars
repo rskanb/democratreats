@@ -50,7 +50,7 @@
   {{!-- Button Group Nav --}}
   <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
     <button class="btn btn-primary w-100" id="option1">
-      <input type="radio" name="options" autocomplete="off"> Resources
+      <input type="radio" name="options" autocomplete="off"> Results
     </button>
     <button class="btn btn-primary w-100" id="option2">
       <input type="radio" name="options" autocomplete="off"> Members
@@ -66,58 +66,63 @@
     </button>
   </div>
 
-        <div class="card-body p-2">
-          <form>
-            <div class="form-group">
-              <label for="pollingPromptID">What is the name of the Poll?</label>
-              <input type="text" class="form-control" id="poll-name-input" placeholder="Name">
-            </div>
-            <div class="form-group">
-              <label for="pollingChoiceID">Please enter breif a description of the poll.
-                </label>
-              <input type="text" class="form-control" id="poll-description-input" placeholder="description" </div>
-                <div class="form-group">
-              <label for="closingTime">What time and date will this poll close?</label>
-              <input type="text" class="form-control" id="poll-close-input" placeholder="5:00 PM">
-            </div>
-            <hr>
+  <div class="card-body p-2 hidden" id="poll-toolbar">
+    <div class="container mx-0">
+      <button class="btn btn-primary" id="poll-form-btn">Create New</button>
 
-            <div id="options-area">
-              <p>Options will appear here</p>
-            </div>
-
-            <label for="pollingPromptID">Add Options for the poll below...</label>
-            <input type="text" class="form-control" id="option-input" placeholder="new option" </div>
-            <button class="btn btn-primary submit-option">Add Option</button>
-            <p class="help-block"></p>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> I am not a roboto
-              </label>
-            </div>
-            <a class="btn btn-primary btn-lg poll-submit">submit this poll</a>
+      <form class="hidden" id="poll-form">
+        <div class="form-group">
+          <label for="pollingPromptID">What is the name of the Poll?</label>
+          <input type="text" class="form-control" id="poll-name-input" placeholder="Name">
         </div>
-        </form>
-      </div>
+        <div class="form-group">
+          <label for="pollingChoiceID">Please enter breif a description of the poll.
+          </label>
+          <input type="text" class="form-control" id="poll-description-input" placeholder="description" </div> <div
+            class="form-group">
+          <label for="closingTime">What time and date will this poll close?</label>
+          <input type="text" class="form-control" id="poll-close-input" placeholder="5:00 PM">
+        </div>
+    </div>
+
+    <hr>
+
+    <div id="options-area">
+      <p>Options will appear here</p>
+    </div>
+
+    <label for="pollingPromptID">Add Options for the poll below...</label>
+    <input type="text" class="form-control" id="option-input" placeholder="new option" </div> <button class="btn btn-primary submit-option">Add
+    Option</button>
+    <p class="help-block"></p>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> I am not a roboto
+      </label>
+    </div>
+    <a class="btn btn-primary btn-lg poll-submit">submit this poll</a>
+  </div>
+  </form>
+</div>
 
 <div id="content-div">
-    <div class="wrapper mx-5 mt-4" id="dataReturn">
-      <div class="card">
-        <div class="card-body p-2">
-          {{!-- <button class="btn btn-primary">Create New</button>
-          <button class="btn btn-danger float-right">Delete Selected</button> --}}
-        </div>
+  <div class="wrapper mx-5 mt-4" id="dataReturn">
+    <div class="card">
+      <div class="card-body p-2">
+        {{!-- <button class="btn btn-primary">Create New</button>
+        <button class="btn btn-danger float-right">Delete Selected</button> --}}
       </div>
-{{!-- 
-<ul>
-{{#each cats}}
-  {{#unless sleepy}}
-    {{> cats/cat-block sleep=true}}
-  {{/unless}}
-{{/each}}
-</ul> --}}
+    </div>
+    {{!--
+    <ul>
+      {{#each cats}}
+      {{#unless sleepy}}
+      {{> cats/cat-block sleep=true}}
+      {{/unless}}
+      {{/each}}
+    </ul> --}}
   </div>
-  </div>
+</div>
 
 
 
