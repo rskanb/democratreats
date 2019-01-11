@@ -20,7 +20,7 @@ $(document).ready(function () {
         alert("Currently, Dont have any Poll");
       }
       //window.location.href = "/employee";
-      for (let i = 0; i < response.length-1; i++) {
+      for (let i = 0; i < response.length - 1; i++) {
         var htmlPoll = $("<div>");
         htmlPoll.addClass("example");
         // Adding a data-attribute
@@ -63,7 +63,7 @@ $(document).ready(function () {
     // delete button
     var deleteBtn = $("<button>");
     deleteBtn.text("X");
-    deleteBtn.addClass("delete btn btn-danger");
+    deleteBtn.addClass("delete btn btn-danger ml-1");
     deleteBtn.attr("data-value", poll.id);
     // edit button
     var editBtn = $("<button>");
@@ -91,8 +91,8 @@ $(document).ready(function () {
       optionBtn.attr("data-value", poll.Options[0].id);
       newPostOption.append(optionBtn);
 
-  }
-  newPostBody.append(newPostOption);
+    }
+    newPostBody.append(newPostOption);
     newPostTitle.append(newPostDate);
     // append card-header buttons
     newPostCardHeading.append(headerBtn);
@@ -408,7 +408,7 @@ $(document).on("click", "button.editpoll", function (event) {
 });
 
 
-function updatePoll(updatedPollData){
+function updatePoll(updatedPollData) {
   $.ajax({
     method: "PUT",
     url: "/api/update",
