@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Democratreats</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,46 +19,20 @@
   </div>
 </nav>
 
-<div class="jumbotron pt-5 pb-4">
-  <div class="wrapper text-center">
-    <h2>
-      Welcome Admin/User!
-      {{!-- check and say hi to admin or user here --}}
-      <br>
-      <br>
-      Currently Viewing Group X
-    </h2>
-    {{!-- Change to dynamically get Group --}}
-    <br>
-
-    <div class="dropdown">
-      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Click here to change Group
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-        {{something}}
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrapper w-75 mx-auto">
+{{!-- Page Wrapper --}}
+<div class="wrapper w-75 mx-auto mt-4">
   {{!-- Button Group Nav --}}
   <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
-    <button class="btn btn-primary w-100" id="option1">
+    <button class="btn btn-primary w-100 mr-1" id="option1">
       <input type="radio" name="options" autocomplete="off"> Results
     </button>
-    <button class="btn btn-primary w-100" id="option2">
+    <button class="btn btn-primary w-100 mr-1" id="option2">
       <input type="radio" name="options" autocomplete="off"> Members
     </button>
-    <button class="btn btn-primary w-100" id="option3">
+    <button class="btn btn-primary w-100 mr-1" id="option3">
       <input type="radio" name="options" autocomplete="off"> Polls
     </button>
-    {{!-- <button class="btn btn-primary w-100" id="option4">
+    {{!-- <button class="btn btn-primary w-100 mr-1" id="option4">
       <input type="radio" name="options" autocomplete="off"> Issues
     </button> --}}
     <button class="btn btn-primary w-100" id="option5">
@@ -66,61 +40,101 @@
     </button>
   </div>
 
-  <div class="card-body p-2 hidden" id="poll-toolbar">
-    <div class="container mx-0">
-      <button class="btn btn-primary" id="poll-form-btn">Create New</button>
+  {{!-- Poll Toolbar --}}
+  <div class="card my-3 hidden" id="poll-toolbar">
+    <div class="card-body">
+      <button class="btn btn-primary" id="poll-form-btn">Create a New Poll</button>
 
       <form class="hidden" id="poll-form">
+        <hr>
         <div class="form-group">
           <label for="pollingPromptID">What is the name of the Poll?</label>
           <input type="text" class="form-control" id="poll-name-input" placeholder="Name">
         </div>
+
         <div class="form-group">
-          <label for="pollingChoiceID">Please enter breif a description of the poll.
+          <label for="pollingChoiceID">Please enter brief a description of the poll.
           </label>
-          <input type="text" class="form-control" id="poll-description-input" placeholder="description" </div> <div
-            class="form-group">
+          <input type="text" class="form-control" id="poll-description-input" placeholder="description">
+        </div>
+
+        <div class="form-group">
           <label for="closingTime">What time and date will this poll close?</label>
           <input type="text" class="form-control" id="poll-close-input" placeholder="5:00 PM">
         </div>
-    </div>
 
-    <hr>
+        <hr>
 
-    <div id="options-area">
-      <p>Options will appear here</p>
-    </div>
+        <div id="options-area">
+          <p>Options will appear here</p>
+        </div>
 
-    <label for="pollingPromptID">Add Options for the poll below...</label>
-    <input type="text" class="form-control" id="option-input" placeholder="new option" </div> <button class="btn btn-primary submit-option">Add
-    Option</button>
-    <p class="help-block"></p>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox"> I am not a roboto
-      </label>
+        <label for="pollingPromptID">Add Options for the poll below...</label>
+        <input type="text" class="form-control" id="option-input" placeholder="new option">
+
+        <button class="btn btn-primary submit-option mt-2">Add
+          Option</button>
+        <p class="help-block"></p>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> I am not a roboto
+          </label>
+        </div>
+        <a class="btn btn-primary btn-lg poll-submit">submit this poll</a>
     </div>
-    <a class="btn btn-primary btn-lg poll-submit">submit this poll</a>
+    </form>
+
   </div>
-  </form>
-</div>
 
-<div id="content-div">
-  <div class="wrapper mx-5 mt-4" id="dataReturn">
-    <div class="card">
-      <div class="card-body p-2">
-        {{!-- <button class="btn btn-primary">Create New</button>
-        <button class="btn btn-danger float-right">Delete Selected</button> --}}
-      </div>
+  {{!-- Member Toolbar --}}
+  <div class="card my-3 hidden" id="member-toolbar">
+    <div class="card-body">
+      <button class="btn btn-primary" id="member-form-btn">Add a new Member</button>
+
+      <form class="hidden" id="member-form">
+        <hr>
+        <div class="form-group">
+          <label for="memberingPromptID">What is the name of the member?</label>
+          <input type="text" class="form-control" id="member-name-input" placeholder="Name">
+        </div>
+
+        <div class="form-group">
+          <label for="memberingChoiceID">Please enter brief a description of the member.
+          </label>
+          <input type="text" class="form-control" id="member-description-input" placeholder="description">
+        </div>
+
+        <div class="form-group">
+          <label for="closingTime">What time and date will this member close?</label>
+          <input type="text" class="form-control" id="member-close-input" placeholder="5:00 PM">
+        </div>
+
+        <hr>
+
+        <div id="options-area">
+          <p>Options will appear here</p>
+        </div>
+
+        <label for="memberingPromptID">Add Options for the member below...</label>
+        <input type="text" class="form-control" id="option-input" placeholder="new option">
+
+        <button class="btn btn-primary submit-option mt-2">Add
+          Option</button>
+        <p class="help-block"></p>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> I am not a roboto
+          </label>
+        </div>
+        <a class="btn btn-primary btn-lg member-submit">submit this member</a>
     </div>
-    {{!--
-    <ul>
-      {{#each cats}}
-      {{#unless sleepy}}
-      {{> cats/cat-block sleep=true}}
-      {{/unless}}
-      {{/each}}
-    </ul> --}}
+    </form>
+
+  </div>
+
+  {{!--Main Content Container --}}
+  <div id="content-div">
+
   </div>
 </div>
 

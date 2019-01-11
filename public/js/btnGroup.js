@@ -56,12 +56,16 @@ $(document).ready(function () {
   //     $(".poll-container").addClass("hidden");
   //     $(".issue-container").addClass("hidden");
 
-  // poll button
+  // poll button =============================================================================
   $("#option3").on("click", function () {
     event.preventDefault();
 
     // show "Create New" button
     $("#poll-toolbar").removeClass("hidden");
+
+    // hide member toolbar
+    $("#member-toolbar").addClass("hidden");
+
 
     //event.stopPropagation();
     $("#content-div").empty();
@@ -92,6 +96,15 @@ $(document).ready(function () {
       $("#poll-form").removeClass("hidden");
     } else {
       $("#poll-form").addClass("hidden");
+    }
+  });
+
+  // on click "Create New", show form
+  $("#member-form-btn").on("click", function () {
+    if ($("#member-form").hasClass("hidden")) {
+      $("#member-form").removeClass("hidden");
+    } else {
+      $("#member-form").addClass("hidden");
     }
   });
 
@@ -137,12 +150,13 @@ $(document).ready(function () {
     return newPostCard;
   }
 
-  // results button
+  // results button =============================================================================
   $("#option1").on("click", function () {
     event.preventDefault();
 
-    // Hides Poll Form Creation
+    // Hides Form Creation
     hidePollForm();
+    hideMemberForm();
 
     // $(".request-container").removeClass("hidden");
     $("#content-div").empty();
@@ -150,11 +164,15 @@ $(document).ready(function () {
     // $(".issue-container").addClass("hidden");
   });
 
-  // members button
+  // members button =============================================================================
   $("#option2").on("click", function () {
 
     // Hides Poll Form Creation
     hidePollForm();
+    hideMemberForm();
+
+    // show "Create New" button
+    $("#member-toolbar").removeClass("hidden");
 
     $("#content-div").empty();
 
@@ -218,10 +236,11 @@ $(document).ready(function () {
     return newPostCard;
   }
 
-  // requests button
+  // requests button =============================================================================
   $("#option5").on("click", function () {
     // Hides Poll Form Creation
     hidePollForm();
+    hideMemberForm();
 
     $("#content-div").empty();
 
@@ -235,6 +254,17 @@ $(document).ready(function () {
 
       if (!$("#poll-form").hasClass("hidden")) {
         $("#poll-form").addClass("hidden");
+      };
+    };
+  };
+
+
+  function hideMemberForm() {
+    if (!$("#member-toolbar").hasClass("hidden")) {
+      $("#member-toolbar").addClass("hidden");
+
+      if (!$("#member-form").hasClass("hidden")) {
+        $("#member-form").addClass("hidden");
       };
     };
   };
