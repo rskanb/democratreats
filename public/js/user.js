@@ -7,7 +7,7 @@ $(document).ready(function() {
   // var loginEmail= $("#email-input");
   // var loginPassword = $("#password-input");
 
-  $(document).on("submit", ".signup", function(){
+  $(document).on("submit", ".signup", function(event){
 
 // ------------------------------------------>>>
 
@@ -48,5 +48,7 @@ $(document).ready(function() {
   }
 
 // });
+
+
 
 });

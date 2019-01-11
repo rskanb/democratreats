@@ -5,8 +5,13 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function (app) {
   // Load index page
   app.get("/", function (req, res) {
-    if (req.user) {
+    // if (req.user) {
+    //   res.redirect("/home");
+    // }
+    if(req.user && user.admin){
       res.redirect("/home");
+    }if(req.user && user.admin){
+      res.redirect("/employee");
     }
     res.render("index", {
       msg: "Welcome!",
@@ -53,11 +58,11 @@ module.exports = function (app) {
   // });
 
 
-  app.get("/home", function (req, res) {
-    res.render("home", {
-      msg: "Welcome!"
-    });
-  });
+  // app.get("/home", function (req, res) {
+  //   res.render("home", {
+  //     msg: "Welcome!"
+  //   });
+  // });
 
   // Load example page and pass in an example by id
   // app.get("/example/:id", function (req, res) {
@@ -71,7 +76,7 @@ module.exports = function (app) {
   app.get("/home",  isAuthenticated, function(req, res) {
     //console.log(req.user);
     db.User.findOne({ where: { email: req.user.email } }).then(function(user) {
-      console.log(user.admin);
+      // console.log(user.admin);
       if(user.admin){
         console.log("inside table")
         res.render("home", {
@@ -83,12 +88,23 @@ module.exports = function (app) {
         });
       }
     });
-    console.log("getting to route /home");
+    // console.log("getting to route /home");
     //console.log(isAuthenticated());
     // res.partials("home", {
     //   msg: "Welcome!",
     // });
   });
+
+  // app.get("/employee", function(req, res) {
+  //       res.render("employee", {
+  //         user: req.user
+  //       });
+    // console.log("getting to route /home");
+    //console.log(isAuthenticated());
+    // res.partials("home", {
+    //   msg: "Welcome!",
+    // });
+  // });
 
 
   // Render 404 page for any unmatched routes
