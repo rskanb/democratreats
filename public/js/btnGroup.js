@@ -1,63 +1,7 @@
-$(document).ready(function () {
-  //     // This file just does a GET request to figure out which user is logged in
-  //     // and updates the HTML on the page
-  //     $.get("/home").then(function(data) {
-  //     //   $(".member-name").text(data.email);
-  //     });
-  //   });
+$(document).ready(function() {
 
+$("#option3").on("click", function () {
 
-  // $("#option1").on("click", function () {
-  //     event.preventDefault();
-  //     $(".resource-container").removeClass("hidden");
-
-  //     $(".member-container").addClass("hidden");
-  //     $(".poll-container").addClass("hidden");
-  //     $(".issue-container").addClass("hidden");
-  //     $(".request-container").addClass("hidden");
-  // });
-
-  // $("#option2").on("click", function () {
-  //     event.preventDefault();
-  //     $(".member-container").removeClass("hidden");
-
-  //     $(".resource-container").addClass("hidden");
-  //     $(".poll-container").addClass("hidden");
-  //     $(".issue-container").addClass("hidden");
-  //     $(".request-container").addClass("hidden");
-  // });
-
-  // $("#option3").on("click", function () {
-  //     event.preventDefault();
-  //     $(".poll-container").removeClass("hidden");
-
-  //     $(".resource-container").addClass("hidden");
-  //     $(".member-container").addClass("hidden");
-  //     $(".issue-container").addClass("hidden");
-  //     $(".request-container").addClass("hidden");
-  // });
-
-  // $("#option4").on("click", function () {
-  //     event.preventDefault();
-  //     $(".issue-container").removeClass("hidden");
-
-  //     $(".resource-container").addClass("hidden");
-  //     $(".member-container").addClass("hidden");
-  //     $(".poll-container").addClass("hidden");
-  //     $(".request-container").addClass("hidden");
-  // });
-
-  // $("#option5").on("click", function () {
-  //     event.preventDefault();
-  //     $(".request-container").removeClass("hidden");
-
-  //     $(".resource-container").addClass("hidden");
-  //     $(".member-container").addClass("hidden");
-  //     $(".poll-container").addClass("hidden");
-  //     $(".issue-container").addClass("hidden");
-
-  // poll button =============================================================================
-  $("#option3").on("click", function () {
     event.preventDefault();
 
     // show "Create New" button
@@ -72,23 +16,25 @@ $(document).ready(function () {
     $("#content-div").empty();
     // $(".poll-container").removeClass("hidden");
     // $(".issue-container").addClass("hidden");
-    // $(".request-container").addClass("hidden");
-    $.get("/api/poll").then(function (response) {
-      console.log(response);
-      var pollToAdd = [];
-      //window.location.href = "/employee";
-      for (let i = 0; i < response.length; i++) {
-        var htmlPoll = $("<div>");
-        htmlPoll.addClass("example");
-        // Adding a data-attribute
-        //htmlPoll.attr("data-name", response[i].id);
-        // Providing the initial button text
-        htmlPoll.text(response[i].name);
+    $.get("/api/poll").then(function(response){
+        console.log(response);
+        var pollToAdd = [];
+        if(response.length===0){
+          alert("Currently, Dont have any Poll");
+        }
+        //window.location.href = "/employee";
+        for(let i=0; i<response.length; i++){
+            var htmlPoll = $("<div>");
+            htmlPoll.addClass("example");
+            // Adding a data-attribute
+            //htmlPoll.attr("data-name", response[i].id);
+            // Providing the initial button text
+            htmlPoll.text(response[i].name);
+            pollToAdd.push(createNewRow(response[i]));
+        }
+            $("#content-div").append(pollToAdd);
+    })
 
-        pollToAdd.push(createNewRow(response[i]));
-      }
-      $("#content-div").append(pollToAdd);
-    });
   });
 
   // on click "Create New", show form
@@ -123,7 +69,8 @@ $(document).ready(function () {
     var editBtn = $("<button>");
     editBtn.text("EDIT");
     editBtn.addClass("edit btn btn-info");
-    var newPostTitle = $("<h2>");
+    editBtn.attr("data-value", poll.id);
+    var newPostTitle = $("<h3>");
     var newPostDate = $("<small>");
     // var newPostAuthor = $("<h5>");
     // newPostAuthor.text("Written by: " + post.Author.name);
@@ -277,14 +224,121 @@ $(document).ready(function () {
   }
   function deletePoll(id) {
     $.ajax({
-      method: "DELETE",
-      url: "/api/poll/" + id
+        method: "DELETE",
+        url: "/api/poll/" + id
+      })
+        .then(function(response) {
+          console.log(response);
+          $("#content-div").empty();
+          $.get("/api/poll").then(function(response){
+            console.log(response);
+            var pollToAdd = [];
+            //window.location.href = "/employee";
+            for(let i=0; i<response.length; i++){
+                var editPoll = $("<div>");
+                editPoll.addClass("example");
+                // Adding a data-attribute
+                //htmlPoll.attr("data-name", response[i].id);
+                // Providing the initial button text
+                editPoll.text(response[i].name);
+                pollToAdd.push(createNewRow(response[i]));
+            }
+                $("#content-div").append(pollToAdd);
+        });
+        });
+}
+
+
+$(document).on("click", "button.edit", handlePollEdit);
+function handlePollEdit(){
+  var editPollId = $(this).data('value');
+    console.log("Edit "+ editPollId);
+    editPoll(editPollId);
+}
+
+function editPoll(id) {
+  $.ajax({
+      method: "POST",
+      url: "/api/edit/" + id
     })
-      .then(function (response) {
+      .then(function(response) {
         console.log(response);
-      });
-  }
-
-
+        var pollToEdit = []
+        $("#content-div").empty();
+      //window.location.href= "/admin"
+      //window.location.href = "/home"
+      var htmlPoll = $("<div>");
+      htmlPoll.attr(contenteditable="true");
+      htmlPoll.text(response.name);
+      pollToEdit.push(editNewRow(response));
+      $("#content-div").append(pollToEdit);
+  });
+}
 });
+
+function editNewRow(poll) {
+  var newPostEdit = $("<div>");
+  newPostEdit.addClass("card");
+  var newPostEditHeading = $("<div>");
+  newPostEditHeading.addClass("card-header");
+  newPostEditHeading.attr('contentEditable','true');
+  var editPostBtn = $("<button>");
+  editPostBtn.text("EDIT");
+  editPostBtn.addClass("editpoll btn btn-info");
+  editPostBtn.attr("data-value", poll.id);
+  var editPostTitle = $("<h3 id='title'>");
+  // var newPostAuthor = $("<h5>");
+  // newPostAuthor.text("Written by: " + post.Author.name);
+  // newPostAuthor.css({
+  //   float: "right",
+  //   color: "blue",
+  //   "margin-top":
+  //   "-10px"
+  // });
+  var newPostEditBody = $("<div>");
+  newPostEditBody.addClass("card-body cardEdit");
+  var newPostEditBody = $("<p id='story'>");
+  newPostEditBody.attr('contentEditable','true');
+  editPostBtn.attr('contentEditable','false');
+  editPostTitle.text(poll.name + " ");
+  newPostEditBody.text(poll.description);
+  newPostEditBody.append(editPostBtn);
+  newPostEditHeading.append(editPostTitle);
+  // newPostCardHeading.append(newPostAuthor);
+  newPostEditBody.append(newPostEditBody);
+  newPostEdit.append(newPostEditHeading);
+  newPostEdit.append(newPostEditBody);
+  newPostEdit.data("post", poll);
+  return newPostEdit;
+}
+
+$(document).on("click", "button.editpoll", function(event){
+  event.preventDefault();
+  var editPollId = $(this).data('value');
+  var title = $('#title').text();
+  var story = $('#story').text();
+  var updateData = {
+    id : editPollId,
+    name: title,
+    description: story
+    }
+  console.log(updateData)
+    updatePoll(updateData)
+  //console.log(""+ editPollId + title + story);
+});
+
+function updatePoll(updatedPollData){
+  // $.post("/api/update", updatedPollData).then(function(response){
+  //   console.log(response)
+  // });
+  $.ajax({
+    method: "PUT",
+    url: "/api/update",
+    data: updatedPollData
+  })
+    .then(function() {
+        //console.log(response);
+      window.location.href = "/home";
+    });
+}
 

@@ -1,21 +1,14 @@
 var db = require("../models");
 var passport = require("../config/passport");
-
-module.exports = function (app) {
+var isAuthenticated = require("../config/middleware/isAuthenticated");
+const url = require("url");
+module.exports = function(app) {
 
   // {successRedirect: "/home", failureRedirect:"/"}
-  app.post("/api/login", passport.authenticate("local"), function (req, res) {
-    // return true;
-    //res.json({value:"true"});
+  app.post("/api/login", passport.authenticate("local"), function(req, res) {
+
     res.redirect("/home")
   });
-
-  // Get all examples
-  // app.get("/api/users", function(req, res) {
-  //   db.User.findAll({}).then(function(dbUsers) {
-  //     res.json(dbUsers);
-  //   });
-  // });
 
   // Signup & Create a new USER
   app.post("/api/users", function (req, res) {
@@ -45,64 +38,75 @@ module.exports = function (app) {
     });
   });
 
-  // LOG IN
-  app.post("/api/login", passport.authenticate("local"), function (req, res) {
-    res.json("/home");
-  });
-
   //Get all poll
-  app.get("/api/poll", function (req, res) {
-    console.log(req);
-    console.log("api poll route hit")
-    db.Poll.findAll({}).then(function (dbpoll) {
-      // var pollObj = {
-      //   pollData: dbpoll.pollData
-      // }
-      // //console.log(pollObj.pollData);
-
+  app.get("/api/poll", function(req,res){
+    // console.log(req);
+    console.log("api getpoll route hit")
+    db.Poll.findAll({}).then(function(dbpoll) {
       res.json(dbpoll);
-      //res.json(dbpoll)});
-    })
-  });
-  app.delete("/api/poll/:id", function (req, res) {
-    console.log(req.params.id);
-    // var id1 = parseInt(req.params.id);
-    // db.Post.destroy({
-    //   where: {
-    //     id: id1
-    //   }
-    // }).then(function(dbPost) {
-    //   res.json(dbPost);
+  })
   });
 
-  //Get all user
-  app.get("/api/user", function (req, res) {
-    console.log(req);
-    console.log("api user route hit")
-    db.User.findAll({}).then(function (dbuser) {
-      // var userObj = {
-      //   userData: dbuser.userData
-      // }
-      // //console.log(userObj.userData);
+  //Delete Poll Baserd on ID Selected 
+  app.delete("/api/poll/:id", isAuthenticated, function(req, res){
+    var delId = parseInt(req.params.id);
+    db.Poll.destroy({
+      where: {
+        id: delId
+      }
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+    });
 
-      res.json(dbuser);
-      //res.json(dbuser)});
-    })
-  });
-  app.delete("/api/user/:id", function (req, res) {
-    console.log(req.params.id);
-    // var id1 = parseInt(req.params.id);
-    // db.Post.destroy({
-    //   where: {
-    //     id: id1
-    //   }
-    // }).then(function(dbPost) {
-    //   res.json(dbPost);
-  });
+    app.post("/api/edit/:id", isAuthenticated, function(req, res){
+      var reqId = req.params.id;
+      if(req.user.admin){
+        db.Poll.findOne({ where: { id: reqId } }).then(function(poll) {
+          var editObject = {
+            id: poll.dataValues.id,
+            name: poll.dataValues.name,
+            description: poll.dataValues.description
+          }
+          res.json(editObject);
+          res.end();
+        })
+        //res.json(reqId);
+        //res.redirect(url.format({pathname:"/admin",query:{reqId}}));
+        //res.redirect("/admin");
+        //console.log(url.format({pathname:"/admin",query: {reqId}}));
+    }else {
+        res.redirect("*")
+     }
+    });
+
 
   app.get("/logout", function (req, res) {
     req.logout();
     console.log("logout");
     res.redirect("/");
   })
+
+
+
+app.put("/api/update", isAuthenticated, function(req,res){
+    console.log("api update put route hit");
+    console.log(req.body);
+    db.Poll.update(
+      req.body,
+      {
+        where: {
+          id: req.body.id
+        }
+      }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+
+
+
+
+
+
 };
