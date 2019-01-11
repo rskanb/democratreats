@@ -1,6 +1,7 @@
 var db = require("../models");
 var path = require("path");
 var isAuthenticated = require("../config/middleware/isAuthenticated");
+const url = require("url");
 
 module.exports = function (app) {
   // Load index page
@@ -45,30 +46,36 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/admin", isAuthenticated, function(req, res) {
-    console.log(req.user);
-    console.log("api edit poll route hit")
-    // db.User.findOne({where:{
-    //   email:
-    // }})
-    // db.Poll.findOne({
-    //   where: {
-    //     id: reqId
-    //   }
-    if(req.user.admin){
-      res.render("admin");
-    } else {
-      res.redirect("*");
-    }
+  // //isAuthenticated,
+  // app.get("/admin",  function(req, res) {
+  //   // if(req.user.admin){
+  //   var editId = parseInt(req.query.reqId);
+  //   console.log( editId + " is " + typeof(editId));
+  //   console.log("api edit poll route hit")
+  //     db.Poll.findOne({ where: { id: editId } }).then(function(poll) {
+  //       console.log("Query Done");
+  //       if(poll){
+  //       // res.type('.html') // => 'text/html'
+  //       // res.type('json') // => 'application/json'
+  //       // res.type('application/json') // => 'application/json'
+  //       // res.type('png') // => image/png:
+  //       // if(!res.headersSent) res.json({}, 0, 500);
+  //       res.render("admin",{
+  //         user: req.user
+  //       });
+  //       res.render("404");
+  //     }else {
 
-    });
-  
-
+  //     }
+  //     });
+  //   // } else {
+  //   //   res.redirect("*");
+  //   // }
+  //   });
 
   // Render 404 page for any unmatched routes
   app.get("*", function (req, res) {
     res.render("404");
   });
 
-  
 };
