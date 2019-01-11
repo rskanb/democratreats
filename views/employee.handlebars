@@ -1,5 +1,4 @@
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Democratreats</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,63 +19,78 @@
   </div>
 </nav>
 
-<div class="jumbotron pt-5 pb-4">
-  <div class="wrapper text-center">
-    <h2>
-      Welcome Employee!
-      {{!-- check and say hi to admin or user here --}}
-      <br>
-      <br>
-      Currently Viewing Group X
-    </h2>
-    {{!-- Change to dynamically get Group --}}
-    <br>
-
-    <div class="dropdown">
-      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Click here to change Group
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrapper w-75 mx-auto">
+{{!-- Page Wrapper --}}
+<div class="wrapper w-75 mx-auto mt-4">
   {{!-- Button Group Nav --}}
   <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
-    <button class="btn btn-primary w-100" id="optionPoll">
+    <button class="btn btn-primary w-100 mr-1" id="optionResult">
+      <input type="radio" name="options" autocomplete="off"> Results
+    </button>
+    <button class="btn btn-primary w-100 mr-1" id="optionPoll">
       <input type="radio" name="options" autocomplete="off"> Polls
     </button>
-    <button class="btn btn-primary w-100" id="optionIssue">
+    <button class="btn btn-primary w-100 mr-1" id="optionIssue">
       <input type="radio" name="options" autocomplete="off"> Issues
     </button>
-    <button class="btn btn-primary w-100" id="optionrequest">
+    <button class="btn btn-primary w-100" id="optionRequest">
       <input type="radio" name="options" autocomplete="off"> Requests
     </button>
   </div>
 
-<div id="content-div">
-    <div class="wrapper mx-5 mt-4" id="dataReturn">
-      <div class="card">
-        <div class="card-body p-2">
-          {{!-- <button class="btn btn-primary">Create New</button>
-          <button class="btn btn-danger float-right">Delete Selected</button> --}}
+  {{!-- Issue Toolbar --}}
+  <div class="card my-3 hidden" id="issue-toolbar">
+    <div class="card-body">
+      <button class="btn btn-primary" id="issue-form-btn">Create a New Issue</button>
+
+      <form class="hidden" id="issue-form">
+        <hr>
+        <div class="form-group">
+          <label for="issueingPromptID">What is the name of the issue?</label>
+          <input type="text" class="form-control" id="issue-name-input" placeholder="Name">
         </div>
-      </div>
-{{!-- 
-<ul>
-{{#each cats}}
-  {{#unless sleepy}}
-    {{> cats/cat-block sleep=true}}
-  {{/unless}}
-{{/each}}
-</ul> --}}
-  </div>
+
+        <div class="form-group">
+          <label for="issueingChoiceID">Please enter brief a description of the issue.
+          </label>
+          <input type="text" class="form-control" id="issue-description-input" placeholder="description">
+        </div>
+
+        <hr>
+
+        <a class="btn btn-primary btn-lg issue-submit">submit this issue</a>
+    </div>
+    </form>
+
   </div>
 
-<script src="/js/employee.js"></script>
+  {{!-- Request Toolbar --}}
+  <div class="card my-3 hidden" id="request-toolbar">
+    <div class="card-body">
+      <button class="btn btn-primary" id="request-form-btn">Create a New Request</button>
+
+      <form class="hidden" id="request-form">
+        <hr>
+        <div class="form-group">
+          <label for="requestingPromptID">What is the name of the request?</label>
+          <input type="text" class="form-control" id="request-name-input" placeholder="Name">
+        </div>
+
+        <div class="form-group">
+          <label for="requestingChoiceID">Please enter brief a description of the request.
+          </label>
+          <input type="text" class="form-control" id="request-description-input" placeholder="description">
+        </div>
+
+        <hr>
+
+        <a class="btn btn-primary btn-lg request-submit">submit this request</a>
+    </div>
+    </form>
+
+  </div>
+
+  {{!-- Main Content Container --}}
+  <div id="content-div">
+  </div>
+
+  <script src="/js/employee.js"></script>
