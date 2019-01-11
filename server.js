@@ -11,7 +11,7 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 // Handlebars
-app.engine("handlebars",exphbs({defaultLayout: "main"}));
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Middleware
@@ -34,10 +34,10 @@ require("./routes/htmlRoutes")(app);
 //   syncOptions.force = true;
 // }
 // Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync().then(function() {
-  app.listen(PORT, function() {
+db.sequelize.sync().then(function () {
+  app.listen(PORT, function () {
     console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT,PORT);
+      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   });
 });
 

@@ -22,6 +22,15 @@ module.exports = function (app) {
     });
   });
 
+  // gets all Users
+  app.get("/api/user", function (req, res) {
+    console.log("api getuser route hit")
+    db.User.findAll({})
+      .then(function (dbUser) {
+        res.json(dbUser);
+      });
+  });
+
   // Create a new POLL
   app.post("/api/polls", isAuthenticated, function (req, res) {
     console.log(req.body);
@@ -38,6 +47,7 @@ module.exports = function (app) {
     });
   });
 
+
     // Create a new REQUEST
     app.post("/api/requests", isAuthenticated, function (req, res) {
       console.log(req.body);
@@ -46,15 +56,18 @@ module.exports = function (app) {
         console.log("request API hit");
       });
     });
+  });
 
   //Get all poll
-  app.get("/api/poll", isAuthenticated, function(req,res){
+  app.get("/api/poll", isAuthenticated, function (req, res) {
+
     // console.log(req);
     console.log("api getpoll route hit")
     console.log(" use id "+ req.user.id);
     var userId = req.user.id;
     db.Poll.findAll({
       include: [db.Option]
+
     }).then(function(dbpoll) {
       var newUserData = dbpoll.push({"userLoginId":  userId});
       console.log(newUserData);
@@ -129,7 +142,7 @@ module.exports = function (app) {
   })
 
 
-app.put("/api/update", isAuthenticated, function(req,res){
+  app.put("/api/update", isAuthenticated, function (req, res) {
     console.log("api update put route hit");
     console.log(req.body);
     db.Poll.update(
