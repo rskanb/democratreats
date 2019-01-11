@@ -1,14 +1,14 @@
 var db = require("../models");
 var passport = require("../config/passport");
 
-module.exports = function(app) {
+module.exports = function (app) {
 
   // {successRedirect: "/home", failureRedirect:"/"}
-  app.post("/api/login", passport.authenticate("local"), function(req, res) {
+  app.post("/api/login", passport.authenticate("local"), function (req, res) {
     // return true;
     //res.json({value:"true"});
     res.redirect("/home")
-    });
+  });
 
   // Get all examples
   // app.get("/api/users", function(req, res) {
@@ -18,11 +18,11 @@ module.exports = function(app) {
   // });
 
   // Signup & Create a new USER
-  app.post("/api/users", function(req, res) {
+  app.post("/api/users", function (req, res) {
     console.log(req.body);
-    db.User.create(req.body).then(function(dbUser) {
+    db.User.create(req.body).then(function (dbUser) {
       res.json(dbUser);
-    }).catch(function(err) {
+    }).catch(function (err) {
       console.log(err);
       res.json(err);
       // res.status(422).json(err.errors[0].message);
@@ -30,31 +30,31 @@ module.exports = function(app) {
   });
 
   // Create a new POLL
-  app.post("/api/polls", function(req, res) {
+  app.post("/api/polls", function (req, res) {
     console.log(req.body);
-    db.Poll.create(req.body).then(function(dbPoll) {
+    db.Poll.create(req.body).then(function (dbPoll) {
       res.json(dbPoll);
     });
   });
 
   // Create a new OPTION
-  app.post("/api/options", function(req, res) {
+  app.post("/api/options", function (req, res) {
     console.log(req.body);
-    db.Option.create(req.body).then(function(dbOption) {
+    db.Option.create(req.body).then(function (dbOption) {
       res.json(dbOption);
     });
   });
 
   // LOG IN
-  app.post("/api/login", passport.authenticate("local"), function(req, res) {
+  app.post("/api/login", passport.authenticate("local"), function (req, res) {
     res.json("/home");
   });
 
   //Get all poll
-  app.get("/api/poll", function(req,res){
+  app.get("/api/poll", function (req, res) {
     console.log(req);
     console.log("api poll route hit")
-    db.Poll.findAll({}).then(function(dbpoll) {
+    db.Poll.findAll({}).then(function (dbpoll) {
       // var pollObj = {
       //   pollData: dbpoll.pollData
       // }
@@ -62,9 +62,9 @@ module.exports = function(app) {
 
       res.json(dbpoll);
       //res.json(dbpoll)});
-  })
-});
-  app.delete("/api/poll/:id", function(req, res){
+    })
+  });
+  app.delete("/api/poll/:id", function (req, res) {
     console.log(req.params.id);
     // var id1 = parseInt(req.params.id);
     // db.Post.destroy({
@@ -73,10 +73,34 @@ module.exports = function(app) {
     //   }
     // }).then(function(dbPost) {
     //   res.json(dbPost);
-    });
+  });
 
+  //Get all user
+  app.get("/api/user", function (req, res) {
+    console.log(req);
+    console.log("api user route hit")
+    db.User.findAll({}).then(function (dbuser) {
+      // var userObj = {
+      //   userData: dbuser.userData
+      // }
+      // //console.log(userObj.userData);
 
-  app.get("/logout", function(req,res){
+      res.json(dbuser);
+      //res.json(dbuser)});
+    })
+  });
+  app.delete("/api/user/:id", function (req, res) {
+    console.log(req.params.id);
+    // var id1 = parseInt(req.params.id);
+    // db.Post.destroy({
+    //   where: {
+    //     id: id1
+    //   }
+    // }).then(function(dbPost) {
+    //   res.json(dbPost);
+  });
+
+  app.get("/logout", function (req, res) {
     req.logout();
     console.log("logout");
     res.redirect("/");
