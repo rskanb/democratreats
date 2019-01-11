@@ -19,6 +19,11 @@
   </div>
 </nav>
 
+{{!-- header --}}
+<div class="jumbotron text-center mt-4 py-4">
+  <h3>Welcome Employee!</h3>
+</div>
+
 {{!-- Page Wrapper --}}
 <div class="wrapper w-75 mx-auto mt-4">
   {{!-- Button Group Nav --}}
@@ -29,9 +34,9 @@
     <button class="btn btn-primary w-100 mr-1" id="optionPoll">
       <input type="radio" name="options" autocomplete="off"> Polls
     </button>
-    <button class="btn btn-primary w-100 mr-1" id="optionIssue">
+    {{!-- <button class="btn btn-primary w-100 mr-1" id="optionIssue">
       <input type="radio" name="options" autocomplete="off"> Issues
-    </button>
+    </button> --}}
     <button class="btn btn-primary w-100" id="optionRequest">
       <input type="radio" name="options" autocomplete="off"> Requests
     </button>
@@ -93,6 +98,7 @@
   <div id="content-div">
   </div>
 </div>
+
 <script src="/js/employee.js"></script>
 
 {{!-- -------script for saving new employee requests------------}}
