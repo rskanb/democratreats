@@ -17,6 +17,7 @@ module.exports = function (sequelize, DataTypes) {
         Option.belongsTo(models.Poll, {
             foreignKey: {
                 allowNull: false
+                // allowNull: true
             }
         });
     };
