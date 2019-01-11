@@ -23,7 +23,7 @@ module.exports = function(app) {
   });
 
   // Create a new POLL
-  app.post("/api/polls", function (req, res) {
+  app.post("/api/polls", isAuthenticated, function (req, res) {
     console.log(req.body);
     db.Poll.create(req.body).then(function (dbPoll) {
       res.json(dbPoll);
@@ -31,7 +31,7 @@ module.exports = function(app) {
   });
 
   // Create a new OPTION
-  app.post("/api/options", function (req, res) {
+  app.post("/api/options", isAuthenticated, function (req, res) {
     console.log(req.body);
     db.Option.create(req.body).then(function (dbOption) {
       res.json(dbOption);
@@ -48,10 +48,12 @@ module.exports = function(app) {
     });
 
   //Get all poll
-  app.get("/api/poll", function(req,res){
+  app.get("/api/poll", isAuthenticated, function(req,res){
     // console.log(req);
     console.log("api getpoll route hit")
-    db.Poll.findAll({}).then(function(dbpoll) {
+    db.Poll.findAll({
+      include: [db.Option]
+    }).then(function(dbpoll) {
       res.json(dbpoll);
   })
   });
@@ -89,14 +91,11 @@ module.exports = function(app) {
      }
     });
 
-
   app.get("/logout", function (req, res) {
     req.logout();
     console.log("logout");
     res.redirect("/");
   })
-
-
 
 app.put("/api/update", isAuthenticated, function(req,res){
     console.log("api update put route hit");
@@ -113,9 +112,4 @@ app.put("/api/update", isAuthenticated, function(req,res){
   });
 
 
-
-
-
-
-
-};
+};  //Keepy this for module.exports

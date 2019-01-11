@@ -1,16 +1,12 @@
 $(document).ready(function() {
   // Getting references to the name input and other user information
-
   var nameInput = $("#name-input");
   var emailInput = $("#signupemail-input");
   var passwordInput = $("#signuppassword-input");
   // var loginEmail= $("#email-input");
   // var loginPassword = $("#password-input");
-
   $(document).on("submit", ".signup", function(event){
-
 // ------------------------------------------>>>
-
   // A function to handle what happens when the form is submitted to create a new user
   // function handleUserFormSubmit(event) {
     event.preventDefault();
@@ -46,9 +42,5 @@ $(document).ready(function() {
         // $("#password-input").val("");
       });
   }
-
-// });
-
-
 
 });
