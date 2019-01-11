@@ -51,9 +51,13 @@ module.exports = function (app) {
   app.get("/api/poll", isAuthenticated, function(req,res){
     // console.log(req);
     console.log("api getpoll route hit")
+    console.log(" use id "+ req.user.id);
+    var userId = req.user.id;
     db.Poll.findAll({
       include: [db.Option]
     }).then(function(dbpoll) {
+      var newUserData = dbpoll.push({"userLoginId":  userId});
+      console.log(newUserData);
       res.json(dbpoll);
     })
   });
