@@ -17,7 +17,7 @@ $(document).ready(function () {
       console.log(response);
       var pollToAdd = [];
       if (response.length === 0) {
-        alert("Currently, Dont have any Poll");
+        alert("Currently, Dont have any Polls");
       }
       //window.location.href = "/employee";
       for (let i = 0; i < response.length - 1; i++) {
