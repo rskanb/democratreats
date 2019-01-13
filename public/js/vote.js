@@ -1,12 +1,13 @@
 $(document).ready(function() {
-
+    var globalThis = ""
     var userIdGlobal = 0
     var pollIdGlobal = 0
     $(document).on("click", ".option1", function(event){
 
-        console.log($(this).data('valueoption'));
-        console.log($(this).data('valuepoll'));
-
+        // console.log($(this).data('valueoption'));
+        // console.log($(this).data('valuepoll'));
+        
+        globalThis = $(this);
         userIdGlobal = $(this).data('userid');
         pollIdGlobal = $(this).data('valuepoll');
     
@@ -38,9 +39,11 @@ $(document).ready(function() {
             }
 
             if(userIdArray.indexOf(userIdGlobal) >= 0){
-                console.log("Vote rejected. You have aready voted on this poll.");
+                globalThis.text("You have already voted in this poll.");
+                console.log("vote rejected")
             }else{
-                console.log("vote accepted")
+                console.log("vote accepted!")
+                globalThis.text("Vote Cast!")
                 $.post("/api/votes", voteData)
                 .then(function(response){
                     console.log(response);
