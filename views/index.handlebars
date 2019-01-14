@@ -4,62 +4,66 @@
 
 <div class="centered-form">
   <div class="container login-container">
-    <div class="row">
-      <div class="col-md-6 ol-md-offset-3">
-        <h2>Login Form</h2>
-        <form class="login">
-          <div class="form-group">
-            <label for="inputEmail">Email address</label>
-            <input type="email" class="form-control" id="email-input" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password" class="form-control" id="password-input" placeholder="Password">
-          </div>
-          <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span> <span class="msg"></span>
-          </div>
-          <button type="submit" class="btn btn-primary" id="login-form">Login </button>
-          <hr>
-          <button id="signup-form" class="btn btn-secondary">Sign Up</button>
-        </form>
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-6">
+          <h2>Login Form</h2>
+          <form class="login">
+            <div class="form-group">
+              <label for="inputEmail">Email address</label>
+              <input type="email" class="form-control" id="email-input" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <label for="inputPassword">Password</label>
+              <input type="password" class="form-control" id="password-input" placeholder="Password">
+            </div>
+            <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span> <span class="msg"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" id="login-form">Login </button>
+            <hr>
+            <button id="signup-form" class="btn btn-secondary">Sign Up</button>
+          </form>
+        </div>
       </div>
-
     </div>
   </div>
 </div>
 
 <div class="container signup-container hidden">
-  <div class="row">
-    <div class="col-md-6 ol-md-offset-3">
-      <h2>Sign Up Form</h2>
-      <form class="signup">
-        <div class="form-group">
-          <label for="inputName">Name</label>
-          <input type="name" class="form-control" id="name-input" placeholder="Name">
-        </div>
-        <div class="form-group">
-          <label for="inputEmail">Email address</label>
-          <input type="email" class="form-control" id="signupemail-input" placeholder="Email">
-        </div>
-        <div class="form-group">
-          <label for="inputPassword">Password</label>
-          <input type="password" class="form-control" id="signuppassword-input" placeholder="Password">
-        </div>
-        <div class="form-group">
-          <label for="inputAdmin">Admin</label>
-          <input type="checkbox" name="acceptRules" class="inline-checkbox" id="admin-input">
-        </div>
-        <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-          <span class="sr-only">Error:</span> <span class="msg"></span>
-        </div>
-        <button type="submit" class="signup btn btn-primary">Sign Up</button>
-        <hr>
-        <button type="submit" class="btn btn-secondary">Login </button>
-      </form>
+  <div class="card">
+    <div class="card-body">
+      <div class="col-md-6">
+        <h2>Sign Up Form</h2>
+        <form class="signup">
+          <div class="form-group">
+            <label for="inputName">Name</label>
+            <input type="name" class="form-control" id="name-input" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label for="inputEmail">Email address</label>
+            <input type="email" class="form-control" id="signupemail-input" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" class="form-control" id="signuppassword-input" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <label for="inputAdmin">Admin</label>
+            <input type="checkbox" name="acceptRules" class="inline-checkbox" id="admin-input">
+          </div>
+          <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span> <span class="msg"></span>
+          </div>
+          <button type="submit" class="signup btn btn-primary">Sign Up</button>
+          <hr>
+          <button type="submit" class="btn btn-secondary">Login </button>
+        </form>
+      </div>
     </div>
+
   </div>
 </div>
 
