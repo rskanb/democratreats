@@ -11,6 +11,14 @@ module.exports = function (sequelize, DataTypes) {
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
+    },
+    closingTime: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    pollOpen: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
     }
   });
 

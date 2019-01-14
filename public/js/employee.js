@@ -1,4 +1,8 @@
+// var moment = require('moment');
+
 $(document).ready(function () {
+
+// moment().format();
     $("#optionResult").on("click", function () {
         event.preventDefault();
 
@@ -14,7 +18,7 @@ $(document).ready(function () {
 
     $("#optionPoll").on("click", function () {
         event.preventDefault();
-
+        console.log(moment().format() + " is the current moment");
         // hide Issue form and toolbar
         hideIssueForm();
 
@@ -33,6 +37,9 @@ $(document).ready(function () {
             var pollToAdd = [];
             //window.location.href = "/employee";
             for (let i = 0; i < response.length-1; i++) {
+
+                console.log()
+
                 var htmlPoll = $("<div>");
                 htmlPoll.addClass("poll");
                
@@ -45,19 +52,38 @@ $(document).ready(function () {
                     //var buttonArray = poll.Options;
                     var formattedDate = new Date(poll.createdAt);
                     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
+
+                    var formattedCloseDate = new Date(poll.closingTime);
+                    formattedCloseDate = moment(formattedCloseDate).format("MMMM Do YYYY, h:mm:ss a");
+
+                    var currentMoment = moment().format("MMMM Do YYYY, h:mm:ss a");
+                    // console.log(moment(currentMoment).isBefore(formattedCloseDate));
+                    // console.log(moment(currentMoment).diff(moment(formattedCloseDate))+ " is the dif");
+
+                    var a = moment([2007, 0, 29]);
+                    var b = moment([2007, 0, 28]);
+                    console.log(a.diff(b, 'days')+ "is the days thingy");
+
                     var newPostCard = $("<div>");
                     newPostCard.addClass("card");
                     var newPostCardHeading = $("<div>");
                     newPostCardHeading.addClass("card-header");
                     var newPostTitle = $("<h3>");
                     var newPostDate = $("<small>");
+
+                    var pollCloseDate = $("<small>");
+                    var spacer = $("<br>");
+
                     var newPostCardBody = $("<div>");
                     newPostCardBody.addClass("card-body");
                     var newPostBody = $("<p>");
                     var newPostOption = $("<p>");
                     newPostTitle.text(poll.name + " ");
                     newPostBody.text(poll.description);
-                    newPostDate.text(formattedDate);
+                    newPostDate.text("Poll Created: " +formattedDate);
+
+                    pollCloseDate.text("Poll Closes: " +formattedCloseDate);
+
                     for(var i =0; i<=3; i++){
                         var optionBtn = $("<button>");
                         optionBtn.text(poll.Options[i].name);
@@ -68,7 +94,13 @@ $(document).ready(function () {
                         newPostOption.append(optionBtn);
                     }
                     newPostBody.append(newPostOption);
+
+                    newPostTitle.append(spacer);
                     newPostTitle.append(newPostDate);
+
+                    newPostTitle.append(spacer);
+                    newPostTitle.append(pollCloseDate);
+
                     newPostCardHeading.append(newPostTitle);
                     newPostCardBody.append(newPostBody);
                     newPostCard.append(newPostCardHeading);
