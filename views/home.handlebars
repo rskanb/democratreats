@@ -28,23 +28,26 @@
 {{!-- Page Wrapper --}}
 <div class="wrapper w-75 mx-auto mt-4">
   {{!-- Button Group Nav --}}
-  <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
-    <button class="btn btn-primary w-100 mr-1" id="option1">
-      <input type="radio" name="options" autocomplete="off"> Results
-    </button>
-    <button class="btn btn-primary w-100 mr-1" id="option2">
-      <input type="radio" name="options" autocomplete="off"> Members
-    </button>
-    <button class="btn btn-primary w-100 mr-1" id="option3">
-      <input type="radio" name="options" autocomplete="off"> Polls
-    </button>
-    {{!-- <button class="btn btn-primary w-100 mr-1" id="option4">
-      <input type="radio" name="options" autocomplete="off"> Issues
-    </button> --}}
-    <button class="btn btn-primary w-100" id="option5">
-      <input type="radio" name="options" autocomplete="off"> Requests
-    </button>
+  <div class="card p-1 px-2">
+    <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
+      <button class="btn btn-primary w-100 mr-1" id="option1">
+        <input type="radio" name="options" autocomplete="off"> Results
+      </button>
+      <button class="btn btn-primary w-100 mr-1" id="option2">
+        <input type="radio" name="options" autocomplete="off"> Members
+      </button>
+      <button class="btn btn-primary w-100 mr-1" id="option3">
+        <input type="radio" name="options" autocomplete="off"> Polls
+      </button>
+      {{!-- <button class="btn btn-primary w-100 mr-1" id="option4">
+        <input type="radio" name="options" autocomplete="off"> Issues
+      </button> --}}
+      <button class="btn btn-primary w-100" id="option5">
+        <input type="radio" name="options" autocomplete="off"> Requests
+      </button>
+    </div>
   </div>
+
 
   {{!-- Poll Toolbar --}}
   <div class="card my-3 hidden" id="poll-toolbar">
