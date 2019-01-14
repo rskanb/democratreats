@@ -5,7 +5,7 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1, 20]
+        len: [1, 30]
       }
     },
     description: {
@@ -15,8 +15,8 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   Poll.associate = function (models) {
-    // Associating Poll with Posts
-    // When an Poll is deleted, also delete any associated Posts
+    // Associating Poll with Options
+    // When an Poll is deleted, also delete any associated Options
     Poll.hasMany(models.Option, {
       onDelete: "cascade"
     });
@@ -24,7 +24,10 @@ module.exports = function (sequelize, DataTypes) {
       foreignKey: {
         allowNull: false
       }
-    })
+    });
+    Poll.hasMany(models.Vote, {
+      onDelete: "cascade"
+    });
   };
 
   Poll.associate = function (models) {

@@ -8,13 +8,23 @@ $(document).ready(function() {
         userId = $(this).data('userid');
         pollId = $(this).data('valuepoll');
     
+
         var optionId = $(this).data('valueoption');
+
 
         var voteData = {
             OptionId: optionId,
             PollId: pollId,
             UserId: userId
         }
+        upsertVote(voteData);
+    });
+
+    function upsertVote(userData) {
+        $.post("/api/votes", userData)
+          .then(function(response){
+          });
+=======
 
         checkVoteStatus(voteData);
         console.log(voteData);
@@ -46,6 +56,5 @@ $(document).ready(function() {
         });
 
     }
-
 
 });

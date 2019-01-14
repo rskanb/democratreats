@@ -5,7 +5,6 @@ $(document).ready(function () {
   
     $(document).on("click", ".request-submit", function(event){
         event.preventDefault();
-        console.log("great success");
           // Don't do anything if the name fields hasn't been filled out
         if (!nameInput.val().trim()) {
         return;
@@ -14,15 +13,12 @@ $(document).ready(function () {
             name: nameInput.val().trim(),
             description: descriptionInput.val()
         }
-
         upsertRequest(requestData);
-        console.log(requestData);
     });
 
     function upsertRequest(userData) {
         $.post("/api/requests", userData)
           .then(function(response){
-              console.log(response);
               $("#request-name-input").val("");
               $("#request-description-input").val("");
           });

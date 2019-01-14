@@ -5,20 +5,19 @@ const url = require("url");
 
 module.exports = function (app) {
   // Load index page
-  app.get("/", function (req, res) {
+  app.get("/",function (req, res) {
     // if (req.user) {
     //   res.redirect("/home");
     // }
     if(req.user && user.admin){
       res.redirect("/home");
-    }if(req.user && user.admin){
+    }if(req.user && !user.admin){
       res.redirect("/employee");
     }
     res.render("index", {
       msg: "Welcome!",
     });
   });
-
 
   // Load example page and pass in an example by id
   // app.get("/example/:id", function (req, res) {
@@ -36,14 +35,19 @@ module.exports = function (app) {
       if(user.admin){
         console.log("inside table")
         res.render("home", {
-          user: req.user
+          user: req.user.name
         });
       }else {
-        res.render("employee", {
-          user: req.user
-        });
+        res.redirect("/employee")
       }
     });
+  });
+
+  app.get("/employee",  isAuthenticated, function(req, res) {
+        console.log(req.user.name)
+        res.render("employee", {
+          user: req.user.name
+        })
   });
   
   // Render 404 page for any unmatched routes
