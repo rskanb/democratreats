@@ -4,13 +4,13 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1, 20]
+                len: [1, 30]
             }
         },
-        vote: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0
-        }
+        // vote: {
+        //     type: DataTypes.INTEGER,
+        //     defaultValue: 0
+        // }
     });
 
     Option.associate = function (models) {
@@ -20,6 +20,10 @@ module.exports = function (sequelize, DataTypes) {
                 // allowNull: true
             }
         });
+
+        Option.hasMany(models.Vote, {
+            onDelete: "cascade"
+          });
     };
 
     return Option;

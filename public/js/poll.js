@@ -19,7 +19,6 @@ $(document).ready(function () {
     event.preventDefault();
     $("#poll-form").addClass("hidden");
 
-    console.log("HERE");
     // Don't do anything if the name fields hasn't been filled out
     if (!nameInput.val().trim()) {
       return;
@@ -30,9 +29,7 @@ $(document).ready(function () {
       closingTime: closeTimeInput.val()
     }
     upsertPoll(pollData);
-
     // Calling the upsertPoll and upserOption function and passing in the values from the inputs
-
     // upsertOption(options);
     console.log(pollData);
   });
@@ -41,18 +38,13 @@ $(document).ready(function () {
   function upsertPoll(userData) {
     $.post("/api/polls", userData)
       .then(function (response) {
-        console.log("Here, " + response.id + " this is the response your are looking for")
         currentPollId = response.id;
-        console.log(currentPollId + " right here buddy");
-
         for (var i = 0; i < options.length; i++) {
           var optionData = {
             name: options[i],
             PollId: currentPollId
           }
-          console.log(currentPollId + " is the current poll id");
           upsertOption(optionData);
-          console.log("the name of the option is " + options[i]);
         };
         // nameInput.val("");
         // emailInput.val(""),
@@ -66,9 +58,12 @@ $(document).ready(function () {
   function upsertOption(optionData1) {
     $.post("/api/options", optionData1)
       .then(function (response) {
-        console.log(response)
-        // nameInput.val("");
-        // emailInput.val(""),
+        $("#poll-name-input").val("");
+        $("#poll-description-input").val("");
+        $("#options-area").empty();
+        window.location.reload();
+        //nameInput.val("");
+        //emailInput.val("");
         // passwordInput.val(""),
         // $(".inline-checkbox").prop('checked', false)
         // $("#email-input").val("");
@@ -90,17 +85,14 @@ $(document).ready(function () {
     options.push(option);
     // Calling renderButtons which handles the processing of our movie array
     renderOptions();
+    $("#option-input").val("");
   });
 
 
   function renderOptions() {
     $("#options-area").empty();
-
     for (var i = 0; i < options.length; i++) {
-      console.log(options[i]);
-
       var a = $("<button>");
-
       // Adding a class
       a.addClass("btn option-button");
       // Adding a data-attribute with a value of the animal at index i
@@ -112,4 +104,6 @@ $(document).ready(function () {
     };
   };
 
+  $("#options-area").empty();
+  
 });
