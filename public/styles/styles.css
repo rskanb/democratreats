@@ -1,7 +1,13 @@
-html {
-  min-height: 100%;
-}
+/* FONT FAMILY REFERENCES */
+/* font-family: 'Bungee Inline', cursive; */
+/* font-family: 'Bungee Shade', cursive; */
+/* font-family: 'Nunito', sans-serif; */
+/* font-family: 'Spectral', serif; */
 
+
+html {
+  height: 100%
+}
 body {
   min-height: 100%;
   /* background-color: #00478e */
