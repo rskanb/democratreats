@@ -11,31 +11,31 @@ $(document).ready(function () {
     hideMemberForm();
     $.get("/api/poll").then(function (response) {
       console.log(response);
-        var pollToAdd = [];
-        if (response.length <= 1) {
-          var newPostCard = $("<div>");
-          newPostCard.addClass("card");
-          var newPostCardHeading = $("<div>");
-          // card-header
-          newPostCardHeading.addClass("card-header mb3");
-          var newPostTitle = $("<h3>");
-          newPostTitle.text("Currently No Polls Available");
-          // append card-header 
-          newPostCardHeading.append(newPostTitle);
-          newPostCard.append(newPostCardHeading);
-          $("#content-div").append(newPostCard);
-      }else {
+      var pollToAdd = [];
+      if (response.length <= 1) {
+        var newPostCard = $("<div>");
+        newPostCard.addClass("card");
+        var newPostCardHeading = $("<div>");
+        // card-header
+        newPostCardHeading.addClass("card-body");
+        var newPostTitle = $("<h3>");
+        newPostTitle.text("Currently No Polls Available");
+        // append card-header 
+        newPostCardHeading.append(newPostTitle);
+        newPostCard.append(newPostCardHeading);
+        $("#content-div").append(newPostCard);
+      } else {
 
-      for (let i = 0; i < response.length - 1; i++) {
-        var htmlPoll = $("<div>");
-        //htmlPoll.addClass("example");
-        // Adding a data-attribute
-        //htmlPoll.attr("data-name", response[i].id);
-        // Providing the initial button text
-        htmlPoll.text(response[i].name);
-        pollToAdd.push(createNewRow(response[i]));
+        for (let i = 0; i < response.length - 1; i++) {
+          var htmlPoll = $("<div>");
+          //htmlPoll.addClass("example");
+          // Adding a data-attribute
+          //htmlPoll.attr("data-name", response[i].id);
+          // Providing the initial button text
+          htmlPoll.text(response[i].name);
+          pollToAdd.push(createNewRow(response[i]));
+        }
       }
-    }
       $("#content-div").append(pollToAdd);
     });
 
@@ -122,25 +122,27 @@ $(document).ready(function () {
     hideMemberForm();
     $("#poll-toolbar").addClass("hidden");
     $("#member-toolbar").addClass("hidden");
-    $.get("/api/votes").then(function(results){
+    $.get("/api/votes").then(function (results) {
       console.log(results);
       var maxResponse = results.length;
       //var pollResults = [];
-        if (results.length <= 1) {
-          var newPostCard = $("<div>");
-          newPostCard.addClass("card");
-          var newPostCardHeading = $("<div>");
-          // card-header
-          newPostCardHeading.addClass("card-header mb3");
-          var newPostTitle = $("<h3>");
-          newPostTitle.text("Currently No Polls Available");
-          // append card-header 
-          newPostCardHeading.append(newPostTitle);
-          newPostCard.append(newPostCardHeading);
-          $("#content-div").append(newPostCard);
-      }else {
-      //This is good at least
-        for(var i=0; i<results.length; i=i+4){
+      if (results.length <= 1) {
+        var newPostCard = $("<div>");
+        newPostCard.addClass("card");
+        var newPostCardHeading = $("<div>");
+        // card-header
+        newPostCardHeading.addClass("card-body");
+        var newPostTitle = $("<h3>");
+        newPostTitle.text("Currently No Polls Available");
+        // append card-header 
+        newPostCardHeading.append(newPostTitle);
+        newPostCard.append(newPostCardHeading);
+        newPostCard.addClass("mt-3")
+
+        $("#content-div").append(newPostCard);
+      } else {
+        //This is good at least
+        for (var i = 0; i < results.length; i = i + 4) {
           var newPostCard = $("<div>");
           newPostCard.addClass("card");
           newPostCard.addClass("iteration")
@@ -154,14 +156,16 @@ $(document).ready(function () {
           var ul = $("<div class = 'row'>");
           ul.addClass("card-body");
           // ul.addClass("span4");
-          for (var j = i; j <=i+3; j++) {
+          for (var j = i; j <= i + 3; j++) {
             var li = $(`<button class ='col-md-8'>${results[j].OptionName}</button><button class ='col-md-4' ><strong>Vote: ${results[j].Count}</strong></button><br />`);
             ul.append(li)
           }
           newPostCard.append(ul);
-        $("#content-div").append(newPostCard);
+          newPostCard.addClass("mt-3")
+
+          $("#content-div").append(newPostCard);
         }  // For Loop End
-    }  // else loop end
+      }  // else loop end
     });
   });//Vote Results Function End
 
@@ -236,16 +240,17 @@ $(document).ready(function () {
       var pollToAdd = [];
       if (response.length === 0) {
         var newPostCard = $("<div>");
-      newPostCard.addClass("card");
-      var newPostCardHeading = $("<div>");
-      // card-header
-      newPostCardHeading.addClass("card-header mb3");
-      var newPostTitle = $("<h3>");
-      newPostTitle.text("Currently You Dont have any pending request");
-      // append card-header 
-      newPostCardHeading.append(newPostTitle);
-      newPostCard.append(newPostCardHeading);
-      $("#content-div").append(newPostCard);
+        newPostCard.addClass("card");
+        var newPostCardHeading = $("<div>");
+        // card-header
+        newPostCardHeading.addClass("card-body mb3");
+        var newPostTitle = $("<h3>");
+        newPostTitle.text("There are currently no pending requests.");
+        // append card-header 
+        newPostCardHeading.append(newPostTitle);
+        newPostCard.append(newPostCardHeading);
+        newPostCard.addClass("mt-3")
+        $("#content-div").append(newPostCard);
       }
       //window.location.href = "/employee";
       for (let i = 0; i < response.length; i++) {
@@ -253,6 +258,7 @@ $(document).ready(function () {
         htmlPoll.addClass("example");
         htmlPoll.text(response[i].name);
         pollToAdd.push(createNewRequest(response[i]));
+        pollToAdd.addClass("mb-3");
       }
       $("#content-div").append(pollToAdd);
     })
@@ -328,7 +334,7 @@ $(document).ready(function () {
           $("#content-div").append(pollToAdd);
         })
       });
-    }
+  }
 
   //Delete Poll Function Handling 
   $(document).on("click", "button.delete", handlePollDelete);

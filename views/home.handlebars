@@ -8,11 +8,14 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+
+      {{!-- <li class="nav-item">
         <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-      </li>
+      </li> --}}
+
       <li class="nav-item">
-        <a class="nav-link" href="#"> Welcome {{user}}</a>
+        <a class="nav-link">{{user}}</a>
+        {{!-- <a class="nav-link" href="#"> Welcome {{user}}</a> --}}
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/logout">Logout</a>
@@ -28,8 +31,8 @@
 {{!-- Page Wrapper --}}
 <div class="wrapper w-75 mx-auto mt-4">
   {{!-- Button Group Nav --}}
-  <div class="card p-1 px-2">
-    <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
+  <div class="card pb-0 pt-2 px-2">
+    <div class="btn-group btn-group-lg btn-group-toggle" role="group" data-toggle="buttons">
       <button class="btn btn-primary w-100 mr-1" id="option1">
         <input type="radio" name="options" autocomplete="off"> Results
       </button>

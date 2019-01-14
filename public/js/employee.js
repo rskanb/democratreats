@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
 
-// moment().format();
+    // moment().format();
     $("#optionResult").on("click", function () {
         event.preventDefault();
         // hide Issue form and toolbar
@@ -12,47 +12,49 @@ $(document).ready(function () {
         $("#content-div").empty();
         $("#poll-toolbar").addClass("hidden");
         $("#member-toolbar").addClass("hidden");
-        $.get("/api/votes").then(function(results){
-          //var pollResults = [];
+        $.get("/api/votes").then(function (results) {
+            //var pollResults = [];
             if (results.length <= 1) {
-              var newPostCard = $("<div>");
-              newPostCard.addClass("card");
-              var newPostCardHeading = $("<div>");
-              // card-header
-              newPostCardHeading.addClass("card-header mb3");
-              var newPostTitle = $("<h3>");
-              newPostTitle.text("Currently No Polls Available");
-              // append card-header 
-              newPostCardHeading.append(newPostTitle);
-              newPostCard.append(newPostCardHeading);
-              $("#content-div").append(newPostCard);
-          }else {
-          //This is good at least
-            for(var i=0; i<results.length; i=i+4){
-              var newPostCard = $("<div>");
-              newPostCard.addClass("card");
-              newPostCard.addClass("iteration")
-              var newPostCardHeading = $("<h3>");
-              // card-header
-              newPostCardHeading.addClass("card-header");
-              newPostCard.addClass("mb-3")
-              // var newPostTitle = $("<h3>");
-              newPostCardHeading.text(results[i].PollName);
-              newPostCard.append(newPostCardHeading);
-              var ul = $("<div class = 'row'>");
-              ul.addClass("card-body");
-              // ul.addClass("span4");
-              for (var j = i; j <=i+3; j++) {
-                var li = $(`<button class ='col-md-8'>${results[j].OptionName}</button><button class ='col-md-4' ><strong>Vote: ${results[j].Count}</strong></button><br />`);
-                ul.append(li)
-              }
-              newPostCard.append(ul);
-            $("#content-div").append(newPostCard);
-            }  // For Loop End
-        }  // else loop end
+                var newPostCard = $("<div>");
+                newPostCard.addClass("card");
+                var newPostCardHeading = $("<div>");
+                // card-header
+                newPostCardHeading.addClass("card-header mb3");
+                var newPostTitle = $("<h3>");
+                newPostTitle.text("Currently No Polls Available");
+                // append card-header 
+                newPostCardHeading.append(newPostTitle);
+                newPostCard.append(newPostCardHeading);
+                newPostCard.addClass("mt-3")
+                $("#content-div").append(newPostCard);
+            } else {
+                //This is good at least
+                for (var i = 0; i < results.length; i = i + 4) {
+                    var newPostCard = $("<div>");
+                    newPostCard.addClass("card");
+                    newPostCard.addClass("iteration")
+                    var newPostCardHeading = $("<h3>");
+                    // card-header
+                    newPostCardHeading.addClass("card-header");
+                    newPostCard.addClass("mb-3")
+                    // var newPostTitle = $("<h3>");
+                    newPostCardHeading.text(results[i].PollName);
+                    newPostCard.append(newPostCardHeading);
+                    var ul = $("<div class = 'row'>");
+                    ul.addClass("card-body");
+                    // ul.addClass("span4");
+                    for (var j = i; j <= i + 3; j++) {
+                        var li = $(`<button class ='col-md-8'>${results[j].OptionName}</button><button class ='col-md-4' ><strong>Vote: ${results[j].Count}</strong></button><br />`);
+                        ul.append(li)
+                    }
+                    newPostCard.append(ul);
+                    newPostCard.addClass("mt-3")
+                    $("#content-div").append(newPostCard);
+                }  // For Loop End
+            }  // else loop end
         });
     });//Vote Results Function End
-        
+
     $("#optionPoll").on("click", function () {
         event.preventDefault();
         console.log(moment().format() + " is the current moment");
@@ -67,10 +69,10 @@ $(document).ready(function () {
         // $(".issue-container").addClass("hidden");
         // $(".request-container").addClass("hidden");
         $.get("/api/poll").then(function (response) {
-            var userId = response[response.length-1].userLoginId;
+            var userId = response[response.length - 1].userLoginId;
             var pollToAdd = [];
             //window.location.href = "/employee";
-            for (let i = 0; i < response.length-1; i++) {
+            for (let i = 0; i < response.length - 1; i++) {
 
                 console.log()
 
@@ -94,7 +96,7 @@ $(document).ready(function () {
 
                     var a = moment([2007, 0, 29]);
                     var b = moment([2007, 0, 28]);
-                    console.log(a.diff(b, 'days')+ "is the days thingy");
+                    console.log(a.diff(b, 'days') + "is the days thingy");
 
                     var newPostCard = $("<div>");
                     newPostCard.addClass("card mb-3");
@@ -112,11 +114,11 @@ $(document).ready(function () {
                     var newPostOption = $("<p>");
                     newPostTitle.text(poll.name + " ");
                     newPostBody.text(poll.description);
-                    newPostDate.text("Poll Created: " +formattedDate);
+                    newPostDate.text("Poll Created: " + formattedDate);
 
-                    pollCloseDate.text("Poll Closes: " +formattedCloseDate);
+                    pollCloseDate.text("Poll Closes: " + formattedCloseDate);
 
-                    for(var i =0; i<=3; i++){
+                    for (var i = 0; i <= 3; i++) {
                         var optionBtn = $("<button>");
                         optionBtn.text(poll.Options[i].name);
                         optionBtn.addClass("option1 btn btn-light btn-lg btn-block");
@@ -138,6 +140,7 @@ $(document).ready(function () {
                     newPostCard.append(newPostCardHeading);
                     newPostCard.append(newPostCardBody);
                     newPostCard.data("post", poll);
+                    newPostCard.addClass("mt-3")
                     return newPostCard;
                 }   //Create new poll function end
                 pollToAdd.push(createNewPollRow(response[i]));
@@ -209,7 +212,7 @@ $(document).ready(function () {
         newPostTitle.text(poll.name + " ");
         newPostBody.text(poll.description);
         newPostDate.text(formattedDate);
-        for(var i =0; i<=3; i++){
+        for (var i = 0; i <= 3; i++) {
             var optionBtn = $("<button>");
             optionBtn.text(poll.Options[i].name);
             optionBtn.addClass("option1 btn btn-light btn-lg btn-block");
