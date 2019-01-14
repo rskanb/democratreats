@@ -92,6 +92,15 @@ module.exports = function (app) {
     })
   });
 
+  //Get all Votes 
+  app.get("/api/vote", isAuthenticated, function(req,res){
+    // console.log(req+ "is the req side ID number thingy");
+    console.log("api get vote request route hit")
+    db.Vote.findAll({}).then(function(dbVote) {
+      res.json(dbVote);
+    })
+  });
+
   //Delete Requests by Admin only
   app.delete("/api/request/:id", isAuthenticated, function (req, res) {
     var delReqId = parseInt(req.params.id);
@@ -105,7 +114,7 @@ module.exports = function (app) {
     });
   });   //Delete Request Function end 
 
-  //Delete Poll Baserd on ID Selected 
+  //Delete Poll Based on ID Selected 
   app.delete("/api/poll/:id", isAuthenticated, function (req, res) {
     var delId = parseInt(req.params.id);
     db.Option.destroy({

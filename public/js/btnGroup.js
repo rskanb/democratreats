@@ -25,6 +25,7 @@ $(document).ready(function () {
           newPostCard.append(newPostCardHeading);
           $("#content-div").append(newPostCard);
       }else {
+
       for (let i = 0; i < response.length - 1; i++) {
         var htmlPoll = $("<div>");
         //htmlPoll.addClass("example");
