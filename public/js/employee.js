@@ -174,7 +174,72 @@ $(document).ready(function () {
         // show "Create New" button
         $("#request-toolbar").removeClass("hidden");
         $("#content-div").empty();
+        $.get("/api/request").then(function (response) {
+            console.log(response);
+            var pollToAdd = [];
+            if (response.length === 0) {
+                var newPostCard = $("<div>");
+                newPostCard.addClass("card");
+                var newPostCardHeading = $("<div>");
+                // card-header
+                newPostCardHeading.addClass("card-body");
+                var newPostTitle = $("<h3>");
+                newPostTitle.text("There are currently no pending requests.");
+                // append card-header 
+                newPostCardHeading.append(newPostTitle);
+                newPostCard.append(newPostCardHeading);
+                newPostCard.addClass("mt-3")
+                $("#content-div").append(newPostCard);
+            }
+            //window.location.href = "/employee";
+            for (let i = 0; i < response.length; i++) {
+                var htmlPoll = $("<div>");
+                htmlPoll.addClass("example");
+                htmlPoll.text(response[i].name);
+                pollToAdd.push(createNewRequest(response[i]));
+            }
+            $("#content-div").append(pollToAdd);
+        })
     });
+
+    function createNewRequest(poll) {
+        var formattedDate = new Date(poll.createdAt);
+        formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
+        var newPostCard = $("<div>");
+        newPostCard.addClass("card");
+        var newPostCardHeading = $("<div>");
+        // card-header
+        newPostCardHeading.addClass("card-header");
+        // delete button
+        var deleteBtn = $("<button>");
+        deleteBtn.text("X");
+        deleteBtn.addClass("deleteRequest float-right btn btn-danger");
+        deleteBtn.attr("data-value", poll.id);
+        // header-button container
+        var headerBtn = $("<div>");
+        headerBtn.addClass("float-right")
+        headerBtn.append(deleteBtn);
+        var newPostTitle = $("<h4>");
+        var newPostDate = $("<small>");
+        var newPostCardBody = $("<div>");
+        newPostCardBody.addClass("card-body");
+        var newPostBody = $("<p>");
+        newPostTitle.text(poll.name + " ");
+        newPostBody.text(poll.description);
+        newPostDate.text(formattedDate);
+        newPostTitle.append(newPostDate);
+        // append card-header buttons
+        newPostCardHeading.append(headerBtn);
+        newPostCardHeading.append(newPostTitle);
+        // newPostCardHeading.append(newPostAuthor);
+        newPostCardBody.append(newPostBody);
+        newPostCard.append(newPostCardHeading);
+        newPostCard.append(newPostCardBody);
+        newPostCard.data("post", poll);
+        // adds styles margin to card
+        newPostCard.addClass("mt-3")
+        return newPostCard;
+    }
 
     // on click "Create New", show form
     $("#request-form-btn").on("click", function () {

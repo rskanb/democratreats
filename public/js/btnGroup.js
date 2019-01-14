@@ -243,7 +243,7 @@ $(document).ready(function () {
         newPostCard.addClass("card");
         var newPostCardHeading = $("<div>");
         // card-header
-        newPostCardHeading.addClass("card-body mb3");
+        newPostCardHeading.addClass("card-body");
         var newPostTitle = $("<h3>");
         newPostTitle.text("There are currently no pending requests.");
         // append card-header 
@@ -258,7 +258,6 @@ $(document).ready(function () {
         htmlPoll.addClass("example");
         htmlPoll.text(response[i].name);
         pollToAdd.push(createNewRequest(response[i]));
-        pollToAdd.addClass("mb-3");
       }
       $("#content-div").append(pollToAdd);
     })
@@ -299,7 +298,7 @@ $(document).ready(function () {
     newPostCard.append(newPostCardBody);
     newPostCard.data("post", poll);
     // adds styles margin to card
-    newPostCard.addClass("mb-3")
+    newPostCard.addClass("mt-3")
     return newPostCard;
   }
 
