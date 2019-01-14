@@ -210,15 +210,19 @@ $(document).ready(function () {
         var newPostCardHeading = $("<div>");
         // card-header
         newPostCardHeading.addClass("card-header");
+
+        // DO NOT DELETE THIS COMMENT BLOCK
+        // IF UNCOMMENT, ALSO UNCOMMENT LINE 255
         // delete button
-        var deleteBtn = $("<button>");
-        deleteBtn.text("X");
-        deleteBtn.addClass("deleteRequest float-right btn btn-danger");
-        deleteBtn.attr("data-value", poll.id);
+        // var deleteBtn = $("<button>");
+        // deleteBtn.text("X");
+        // deleteBtn.addClass("deleteRequest float-right btn btn-danger");
+        // deleteBtn.attr("data-value", poll.id);
+
         // header-button container
         var headerBtn = $("<div>");
         headerBtn.addClass("float-right")
-        headerBtn.append(deleteBtn);
+        // headerBtn.append(deleteBtn);
         var newPostTitle = $("<h4>");
         var newPostDate = $("<small>");
         var newPostCardBody = $("<div>");
