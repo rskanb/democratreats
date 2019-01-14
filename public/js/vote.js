@@ -1,18 +1,14 @@
 $(document).ready(function() {
-
-    var userIdGlobal = 0
-    var pollIdGlobal = 0
+    var globalThis = ""
+    var userId = 0
+    var pollId = 0
     $(document).on("click", ".option1", function(event){
 
-        console.log($(this).data('valueoption'));
-        console.log($(this).data('valuepoll'));
-
-        userIdGlobal = $(this).data('userid');
-        pollIdGlobal = $(this).data('valuepoll');
+        globalThis = $(this);
+        userId = $(this).data('userid');
+        pollId = $(this).data('valuepoll');
     
         var optionId = $(this).data('valueoption');
-        var pollId = $(this).data('valuepoll');
-        var userId = $(this).data('userid');
 
         var voteData = {
             OptionId: optionId,
@@ -24,23 +20,24 @@ $(document).ready(function() {
         console.log(voteData);
     });
 
-// -----------function that checks if a user has already voted on the poll they are voting on. then sends a post if the user has not voted on the poll------ 
+// -----------function that checks if a user has already voted on the poll they are voting on. Then sends a post if the user has not voted on the poll------ 
     function checkVoteStatus(voteData) {
-        // console.log(userIdGlobal +" is supposed to be the user ID")
         $.get("/api/vote").then(function(response){
 
             userIdArray = [];
 
             for (var i=0; i<response.length; i++){
-                if(response[i].PollId === pollIdGlobal){
+                if(response[i].PollId === pollId){
                     userIdArray.push(response[i].UserId);
                 }
             }
 
-            if(userIdArray.indexOf(userIdGlobal) >= 0){
-                console.log("Vote rejected. You have aready voted on this poll.");
+            if(userIdArray.indexOf(userId) >= 0){
+                globalThis.text("You have already voted in this poll.");
+                console.log("vote rejected")
             }else{
-                console.log("vote accepted")
+                console.log("vote accepted!")
+                globalThis.text("Vote Cast!")
                 $.post("/api/votes", voteData)
                 .then(function(response){
                     console.log(response);
