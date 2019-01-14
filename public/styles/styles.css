@@ -4,6 +4,25 @@ html {
 
 body {
   min-height: 100%;
+  /* background-color: #00478e */
+  /* background-image: linear-gradient(to bottom right, #77C9D4, #57BC90); */
+  /* background-color: rgba(0, 111, 163, 0.733); */
+  background-image: linear-gradient(to bottom right, #77C9D4, rgb(85, 138, 145),rgb(0, 111, 163));
+
+}
+
+.navbar-dark {
+  /* background-color: #015249 !important; */
+  background-color: rgb(0, 95, 139) !important;
+}
+
+.jumbotron {
+  background-color: white;
+}
+
+.card-header {
+  background-color: rgb(255, 209, 51);
+  /* background-color: rgb(191, 214, 216); */
 }
 
 .list-group-item {
@@ -18,6 +37,22 @@ body {
   margin-bottom: 10px;
 }
 
-.card-header {
-  background-color: rgb(227, 247, 220)
+.btn-primary:not([disabled]):not(.disabled).active, .btn-primary:not([disabled]):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: black;
+    background-color: rgb(255, 209, 51);
+    border-color: rgb(255, 209, 51);
 }
+
+.option-button {
+  background-color: #a3deff;
+  margin-right: 10px
+}
+
+.btn-light {
+  background-color: #efefef;
+}
+
+a:not([href]):not([tabindex]) {
+  color: white !important;
+}
+

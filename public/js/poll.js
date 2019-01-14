@@ -5,6 +5,7 @@ $(document).ready(function () {
 
   var nameInput = $("#poll-name-input");
   var descriptionInput = $("#poll-description-input");
+  var closeTimeInput = $("#poll-close-input");
 
   var options = [];
   // var passwordInput = $("#signuppassword-input");
@@ -25,6 +26,7 @@ $(document).ready(function () {
     var pollData = {
       name: nameInput.val().trim(),
       description: descriptionInput.val(),
+      closingTime: closeTimeInput.val()
     }
     upsertPoll(pollData);
     // Calling the upsertPoll and upserOption function and passing in the values from the inputs

@@ -7,11 +7,12 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      {{!-- <li class="nav-item">
         <a class="nav-link" href="/home">Home<span class="sr-only">(current)</span></a>
-      </li>
+      </li> --}}
       <li class="nav-item">
-        <a class="nav-link" href="#">Welcome {{user}}</a>
+        <a class="nav-link"> {{user}} - Employee Account - </a>
+        {{!-- <a class="nav-link" href="#">Welcome {{user}}</a> --}}
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/logout">Logout</a>
@@ -21,25 +22,27 @@
 
 {{!-- header --}}
 <div class="jumbotron text-center mt-4 py-4">
-  <h3>Welcome {{user}} , thanks for login as an employee!!!</h3>
+  <h3>Welcome, {{user}}</h3>
 </div>
 
 {{!-- Page Wrapper --}}
 <div class="wrapper w-75 mx-auto mt-4">
   {{!-- Button Group Nav --}}
-  <div class="btn-group btn-group-lg btn-group-toggle d-flex" role="group" data-toggle="buttons">
-    <button class="btn btn-primary w-100 mr-1" id="optionResult">
-      <input type="radio" name="options" autocomplete="off"> Results
-    </button>
-    <button class="btn btn-primary w-100 mr-1" id="optionPoll">
-      <input type="radio" name="options" autocomplete="off"> Polls
-    </button>
-    {{!-- <button class="btn btn-primary w-100 mr-1" id="optionIssue">
-      <input type="radio" name="options" autocomplete="off"> Issues
-    </button> --}}
-    <button class="btn btn-primary w-100" id="optionRequest">
-      <input type="radio" name="options" autocomplete="off"> Requests
-    </button>
+  <div class="card pb-0 pt-2 px-2">
+    <div class="btn-group btn-group-lg btn-group-toggle" role="group" data-toggle="buttons">
+      <button class="btn btn-primary w-100 mr-1" id="optionResult">
+        <input type="radio" name="options" autocomplete="off"> Results
+      </button>
+      <button class="btn btn-primary w-100 mr-1" id="optionPoll">
+        <input type="radio" name="options" autocomplete="off"> Polls
+      </button>
+      {{!-- <button class="btn btn-primary w-100 mr-1" id="optionIssue">
+        <input type="radio" name="options" autocomplete="off"> Issues
+      </button> --}}
+      <button class="btn btn-primary w-100" id="optionRequest">
+        <input type="radio" name="options" autocomplete="off"> Requests
+      </button>
+    </div>
   </div>
 
   {{!-- Issue Toolbar --}}
@@ -106,4 +109,3 @@
 
 {{!--------------script for saving vote information--------- --}}
 <script src="/js/vote.js"></script>
-

@@ -34,6 +34,7 @@ require("./routes/htmlRoutes")(app);
 //   syncOptions.force = true;
 // }
 // Starting the server, syncing our models ------------------------------------/
+// db.sequelize.sync({ force: true }).then(function () {
 db.sequelize.sync().then(function () {
   app.listen(PORT, function () {
     console.log(

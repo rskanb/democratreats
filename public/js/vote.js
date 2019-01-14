@@ -8,16 +8,14 @@ $(document).ready(function() {
         userId = $(this).data('userid');
         pollId = $(this).data('valuepoll');
     
-
         var optionId = $(this).data('valueoption');
-
 
         var voteData = {
             OptionId: optionId,
             PollId: pollId,
             UserId: userId
         }
-        upsertVote(voteData);
+        checkVoteStatus(voteData);
     });
 
     function upsertVote(userData) {

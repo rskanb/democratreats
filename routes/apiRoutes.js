@@ -175,7 +175,7 @@ module.exports = function (app) {
 
 //Generate Vote Results 
 app.get("/api/votes", isAuthenticated, function(req, res){   
-  db.sequelize.query("SELECT A.id AS pollid, B.id AS optionid, A.name AS PollName, B.name AS OptionName, COUNT(C.id) AS Count FROM Polls AS A JOIN Options AS B ON A.id = B.PollId LEFT JOIN Votes AS C ON A.id = C.PollId AND B.id = C.OptionId GROUP BY A.id, B.id, A.name, B.name", { type: db.sequelize.QueryTypes.SELECT}).then(function(dbpoll) {
+  db.sequelize.query("SELECT A.id AS pollid, B.id AS optionid, A.name AS PollName, B.name AS OptionName, COUNT(C.id) AS Count FROM Polls AS A JOIN Options AS B ON A.id = B.PollId LEFT JOIN Votes AS C ON A.id = C.PollId AND B.id = C.OptionId GROUP BY A.id, B.id, A.name, B.name ORDER BY A.id", { type: db.sequelize.QueryTypes.SELECT}).then(function(dbpoll) {
   console.log("api votes route has hit");
   res.json(dbpoll);
 });
