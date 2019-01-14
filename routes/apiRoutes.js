@@ -2,11 +2,11 @@ var db = require("../models");
 var passport = require("../config/passport");
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 const url = require("url");
+
 module.exports = function (app) {
 
-  // {successRedirect: "/home", failureRedirect:"/"}
+  // Login {successRedirect: "/home", failureRedirect:"/"}
   app.post("/api/login", passport.authenticate("local"), function (req, res) {
-
     res.redirect("/home")
   });
 
@@ -14,16 +14,18 @@ module.exports = function (app) {
   app.post("/api/users", function (req, res) {
     console.log(req.body);
     db.User.create(req.body).then(function (dbUser) {
-      res.json(dbUser);
+      //res.json(dbUser);
+      res.redirect('/')
     }).catch(function (err) {
-      console.log(err);
+      //console.log(err);
       res.json(err);
+      //res.redirect('/')
       // res.status(422).json(err.errors[0].message);
     });
   });
 
   // gets all Users
-  app.get("/api/user", function (req, res) {
+  app.get("/api/user", isAuthenticated, function (req, res) {
     console.log("api getuser route hit")
     db.User.findAll({})
       .then(function (dbUser) {
@@ -55,7 +57,6 @@ module.exports = function (app) {
       });
     });
 
-
     // Create a new REQUEST
     app.post("/api/requests", isAuthenticated, function (req, res) {
       console.log(req.body);
@@ -68,7 +69,6 @@ module.exports = function (app) {
 
   //Get all poll
   app.get("/api/poll", isAuthenticated, function (req, res) {
-
     // console.log(req);
     console.log("api getpoll route hit")
     console.log(" use id "+ req.user.id);
@@ -164,5 +164,43 @@ module.exports = function (app) {
       });
   });
 
+//Generate Vote Results 
+app.get("/api/votes", isAuthenticated, function(req, res){   
+  db.sequelize.query("SELECT A.id AS pollid, B.id AS optionid, A.name AS PollName, B.name AS OptionName, COUNT(C.id) AS Count FROM Polls AS A JOIN Options AS B ON A.id = B.PollId LEFT JOIN Votes AS C ON A.id = C.PollId AND B.id = C.OptionId GROUP BY A.id, B.id, A.name, B.name", { type: db.sequelize.QueryTypes.SELECT}).then(function(dbpoll) {
+  console.log("api votes route has hit");
+  res.json(dbpoll);
+});
 
-};  //Keepy this for module.exports
+});   //Get VOTE result api function end 
+
+//Generate Vote Results tried with include but not working 
+// app.get("/api/votes", isAuthenticated, function(req, res){   
+//   db.Vote.findAll({
+//    //raw: true,
+//    //attributes: ['id','name'],
+//    attributes: ['UserId','PollId','OptionId'],
+//     include: [{ 
+//       model: db.Poll,
+//       include:[{
+//         //attributes: ['UserId','PollId','OptionId'],
+//         // attribute: [Sequelize.fn('count', Sequelize.col('OptionId')), 'VoteCount'],
+//         model: db.Option,
+//         //group: ['PollId', "OptionId"]
+//       }],
+//     }],
+//     // group: ['PollId']
+//   }).then(function(dbpoll) {
+//     console.log("api votes route has hit");
+//     res.json(dbpoll);
+//   });
+  
+  //console.log("api votes route has hit");
+  //[sequelize.fn('COUNT', 'Post.id'), 'PostCount']
+  
+  // });   //Get VOTE result api function end 
+  
+
+
+
+};  //Keep this for module.exports
+

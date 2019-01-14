@@ -13,3 +13,11 @@ body {
 .hidden {
   display: none;
 }
+
+.btn-group {
+  margin-bottom: 10px;
+}
+
+.card-header {
+  background-color: rgb(227, 247, 220)
+}
