@@ -1,30 +1,52 @@
 $(document).ready(function() {
-
-
+    var globalThis = ""
+    var userId = 0
+    var pollId = 0
     $(document).on("click", ".option1", function(event){
 
+        globalThis = $(this);
+        userId = $(this).data('userid');
+        pollId = $(this).data('valuepoll');
+    
 
-        console.log($(this).data('option-id'));
-        console.log($(this).data('poll-id'));
+        var optionId = $(this).data('valueoption');
 
-        var optionId = $(this).data('option-id');
-        var pollId = $(this).data('poll-id');
 
         var voteData = {
             OptionId: optionId,
-            votePollId: pollId,
-            foreignKey: pollId
+            PollId: pollId,
+            UserId: userId
         }
-
-        upsertVote(voteData);
+        checkVoteStatus(voteData);
     });
 
-    function upsertVote(userData) {
-        $.post("/api/votes", userData)
-          .then(function(response){
-              console.log(response);
-          });
-    }
 
+
+// -----------function that checks if a user has already voted on the poll they are voting on. Then sends a post if the user has not voted on the poll------ 
+    function checkVoteStatus(voteData) {
+        $.get("/api/vote").then(function(response){
+
+            userIdArray = [];
+
+            for (var i=0; i<response.length; i++){
+                if(response[i].PollId === pollId){
+                    userIdArray.push(response[i].UserId);
+                }
+            }
+
+            if(userIdArray.indexOf(userId) >= 0){
+                globalThis.text("You have already voted in this poll.");
+                console.log("vote rejected")
+            }else{
+                console.log("vote accepted!")
+                globalThis.text("Vote Cast!")
+                $.post("/api/votes", voteData)
+                .then(function(response){
+                    console.log(response);
+                });
+            }
+        });
+
+    }
 
 });

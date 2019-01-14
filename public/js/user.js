@@ -26,14 +26,14 @@ $(document).ready(function() {
     }
     // Calling the upsertUser function and passing in the value of the name input
     upsertUser(userData);
-    console.log(userData);
   });
 
   // A function for creating a user.
   function upsertUser(userData) {
     $.post("/api/users", userData)
       .then(function(response){
-        console.log(response)
+        $("#signuperror").text("Error");
+        $("#results-modal").modal('show');
         nameInput.val("");
         emailInput.val(""),
         passwordInput.val(""),
