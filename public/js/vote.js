@@ -17,18 +17,10 @@ $(document).ready(function() {
             PollId: pollId,
             UserId: userId
         }
-        upsertVote(voteData);
-    });
-
-    function upsertVote(userData) {
-        $.post("/api/votes", userData)
-          .then(function(response){
-          });
-=======
-
         checkVoteStatus(voteData);
-        console.log(voteData);
     });
+
+
 
 // -----------function that checks if a user has already voted on the poll they are voting on. Then sends a post if the user has not voted on the poll------ 
     function checkVoteStatus(voteData) {
