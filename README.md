@@ -45,6 +45,20 @@ THE ADMIN -
 
 There are be two kinds of accounts that can be created with different privileges: admin accounts, and employee accounts. Admins have full CRUD functionality regarding polls. Employees can vote in open polls and view their poll's final result. Employees can also create requests to suggest certain items they want in the office. Once a poll is closed, everyone is be able to see the winning result of the poll, yet only admins may see the current vote totals. The polls are open for voting until a set date that is determined by the admin when they create the poll. Employees can see when the poll closes so they know how long they have to submit a vote. Built-in user authentication enables new accounts to be created and signed into. A database with several tables handles all the poll data, and voting records.
 
+## Admin Account View
+
+![Admin View](snap/admin.png)
+
+## User Account View
+
+![User View](snap/user.png)
+
+## Display Vote Results
+
+![Vote Results](snap/vote.png)
+
+
+
 ## Why
 
 Democratreats makes an easy-to-use space for community input to build a healthy, active culture and make decisions with transparency. We the creators want to promote the democratic process while giving options to communicate with peers and leadership.
