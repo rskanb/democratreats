@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "B70ng570mE",
     "database": "democratreatsdb",
     "host": "localhost",
     "dialect": "mysql"
