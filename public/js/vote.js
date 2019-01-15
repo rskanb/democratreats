@@ -8,9 +8,7 @@ $(document).ready(function() {
         userId = $(this).data('userid');
         pollId = $(this).data('valuepoll');
     
-
         var optionId = $(this).data('valueoption');
-
 
         var voteData = {
             OptionId: optionId,
@@ -20,7 +18,14 @@ $(document).ready(function() {
         checkVoteStatus(voteData);
     });
 
+    function upsertVote(userData) {
+        $.post("/api/votes", userData)
+          .then(function(response){
+          });
 
+        checkVoteStatus(voteData);
+        console.log(voteData);
+    };
 
 // -----------function that checks if a user has already voted on the poll they are voting on. Then sends a post if the user has not voted on the poll------ 
     function checkVoteStatus(voteData) {
